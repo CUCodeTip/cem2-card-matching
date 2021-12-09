@@ -4,6 +4,7 @@
   import { onMount } from 'svelte'
   import Particles from 'svelte-particles'
   import { fade } from 'svelte/transition'
+  import { prefetchRoutes } from '$app/navigation'
 
   let particlesConfig = null
 
@@ -12,6 +13,8 @@
     particlesConfig = (await import('../particlesConfig')).default
     // request.auth cannot be null when interacting with firestore, see firestore.rules
     await signInAnonymously(auth)
+    // prefetch routes to to speed up subsequent navigation
+    prefetchRoutes()
   })
 </script>
 
