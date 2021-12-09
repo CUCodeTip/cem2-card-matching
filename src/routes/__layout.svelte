@@ -1,0 +1,78 @@
+<script lang="ts">
+  import { signInAnonymously } from 'firebase/auth'
+  import { auth } from '../initFirebase'
+  import { onMount } from 'svelte'
+  import Particles from 'svelte-particles'
+  import { fade } from 'svelte/transition'
+
+  let particlesConfig = null
+
+  onMount(async () => {
+    // This needs to be imported on client only or else Vite complains about window not being defined
+    particlesConfig = (await import('../particlesConfig')).default
+    console.log('object')
+    // request.auth cannot be null when interacting with firestore, see firestore.rules
+    await signInAnonymously(auth)
+  })
+</script>
+
+<main>
+  <slot />
+</main>
+
+{#if particlesConfig}
+  <div in:fade>
+    <Particles id="tsparticles" options={$particlesConfig} />
+  </div>
+{/if}
+
+<style windi:preflights:global windi:safelist:global>
+  :root {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --gray-400: #cbd5e0;
+    --gray-900: #1a202c;
+    --gray-100: #f7fafc;
+    background-color: var(--gray-900);
+    color: var(--gray-100);
+  }
+
+  main {
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  :global(h1) {
+    @apply text-6xl text-gray-100;
+  }
+
+  :global(button) {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.8125rem 2.1875rem;
+    color: var(--gray-100);
+    background-color: var(--gray-900);
+    border-radius: 30px;
+    border: 3px solid var(--gray-100);
+    outline: none;
+    font-variant-numeric: tabular-nums;
+  }
+  :global(button:hover) {
+    background-color: var(--gray-100);
+    color: var(--gray-900);
+  }
+  :global(button:focus) {
+    outline: none;
+  }
+  :global(button:active) {
+    background-color: var(--gray-400);
+    border-color: var(--gray-400);
+    color: var(--gray-900);
+  }
+</style>
