@@ -10,7 +10,6 @@
   onMount(async () => {
     // This needs to be imported on client only or else Vite complains about window not being defined
     particlesConfig = (await import('../particlesConfig')).default
-    console.log('object')
     // request.auth cannot be null when interacting with firestore, see firestore.rules
     await signInAnonymously(auth)
   })
