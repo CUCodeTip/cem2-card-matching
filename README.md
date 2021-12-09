@@ -1,38 +1,43 @@
-# create-svelte
+# 🎉 CEM II Term Project - Card Matching A/B Testing
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+This website is a part of Computer Engineering Mathematic 2 academic year 2021. The project is about testing how different theme colors affect people's ability to memorize pictures in matching game.  
+This project was bootstrapped with [Vite](https://github.com/vitejs/vite).
 
-## Creating a project
+## 📢 Notes to developers
 
-If you're seeing this, you've probably already done this step. Congrats!
+You may want to use these.
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+### tsParticles
 
-# create a new project in my-app
-npm init svelte@next my-app
-```
+See <https://www.npmjs.com/package/svelte-particles>
 
-> Note: the `@next` is temporary
+### Iconify - icon library
 
-## Developing
+Example of a close icon <https://icon-sets.iconify.design/mdi/close-circle-outline/>
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## 🌏 Deployment
 
-```bash
-npm run dev
+Hosting URL for master branch: <https://cem2-card-matching.web.app/>
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## 🔥 Scripts
 
-## Building
+### `npm run dev`
 
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
+Runs the app in the development mode.
 
-```bash
-npm run build
-```
+### `npm run build`
 
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+Builds the app for production to the `build` folder.
+
+### `npm run serve`
+
+Opens the preview of your build.
+
+### `npm run check`
+
+Runs a test checking for possible-buggy parts in the code base.
+
+## ✅ Recommended IDE Setup
+
+Don't forget to install the recommended vscode extensions. 😉  
+[VSCode](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
