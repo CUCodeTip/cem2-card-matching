@@ -68,6 +68,7 @@
   :global(h1) {
     line-height: 1.2;
     @apply text-4xl text-gray-100;
+    font-weight: bold;
     margin: 0;
   }
 
