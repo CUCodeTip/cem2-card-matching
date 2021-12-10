@@ -1,4 +1,5 @@
 <script>
+  import { cubicOut } from 'svelte/easing'
   import { createEventDispatcher } from 'svelte'
 
   let src = '/Close.png'
@@ -18,9 +19,37 @@
   function setActivePicture() {
     src = '/Close_active.png'
   }
+
+  function zoomIn(node, { duration }) {
+    return {
+      duration,
+      css: (t) => {
+        const eased = cubicOut(t)
+        return `
+					transform: scale(${eased}) ;
+          
+          `
+      },
+    }
+  }
+  function zoomOut(node, { duration }) {
+    return {
+      duration,
+      css: (t) => {
+        return `
+					transform: scale(${t}) ;
+          opacity: ${t}; 
+          `
+      },
+    }
+  }
 </script>
 
-<div class="absolute">
+<div
+  class="absolute"
+  in:zoomIn={{ duration: 500 }}
+  out:zoomOut={{ duration: 200 }}
+>
   <div class="modal">
     <div
       class="close"
@@ -74,6 +103,6 @@
     display: flex;
     justify-content: flex-end;
     transform: translate(50%, -50%);
-    width: 20px;
+    width: 3rem;
   }
 </style>
