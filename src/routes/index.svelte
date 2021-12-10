@@ -1,10 +1,17 @@
 <script lang="ts">
 </script>
 
-<main>
-  <h1>Hello there!</h1>
-  <a href="/tutorial"><button>Let's Play!</button></a>
-</main>
+<div>
+  <h1>Website Title</h1>
+  <p>Erat dolor sed risus nulla amet scelerisque.</p>
+</div>
+<a href="/tutorial"><button>Start</button></a>
 
 <style>
+  h1 {
+    margin-bottom: 1rem;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
 </style>
