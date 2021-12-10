@@ -61,7 +61,7 @@
           <img
             transition:fade={{ duration: 100 }}
             src={image.src}
-            alt="s"
+            alt={image.alt}
             class="back-face object-cover object-center"
           />
         {/if}
