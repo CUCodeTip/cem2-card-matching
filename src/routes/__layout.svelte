@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   export const load = async ({ page }) => ({
     props: {
-      key: page.path,
+      pagePath: page.path,
     },
   })
 </script>
@@ -13,11 +13,11 @@
   import Particles from 'svelte-particles'
   import { fade } from 'svelte/transition'
   import { prefetchRoutes } from '$app/navigation'
-
-  // Components
   import PageTransition from '$lib/PageTransition.svelte'
 
-  export let key: string
+  // changes on page navigation, trigger page transition
+  export let pagePath: string
+
   let particlesConfig = null
 
   onMount(async () => {
@@ -31,7 +31,7 @@
 </script>
 
 <main>
-  <PageTransition refresh={key}>
+  <PageTransition refresh={pagePath}>
     <slot />
   </PageTransition>
 </main>
