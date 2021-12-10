@@ -1,27 +1,27 @@
 <!-- PageTransition.svelte -->
 <script lang="ts">
-  import { fly } from 'svelte/transition'
+  import { fade } from 'svelte/transition'
   export let refresh = ''
 </script>
 
 {#key refresh}
-  <main
-    in:fly={{ x: -10, duration: 500, delay: 500 }}
-    out:fly={{ x: 10, duration: 500 }}
-  >
+  <div class="page-transition" transition:fade={{ duration: 1000 }}>
     <slot />
-  </main>
+  </div>
 {/key}
 
 <style>
-  main {
+  .page-transition {
+    position: absolute;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
     padding: 1rem;
+    overflow: hidden;
   }
 </style>
