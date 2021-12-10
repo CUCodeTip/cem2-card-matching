@@ -5,7 +5,11 @@
 </script>
 
 {#key refresh}
-  <div class="page-transition" transition:fade={{ duration: 1000 }}>
+  <div
+    class="page-transition"
+    in:fade={{ duration: 500, delay: 500 }}
+    out:fade={{ duration: 500 }}
+  >
     <slot />
   </div>
 {/key}
