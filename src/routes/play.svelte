@@ -1,9 +1,8 @@
 <script>
-import { goto } from '$app/navigation';
-
+  import { goto } from '$app/navigation'
   import { fade } from 'svelte/transition'
 
-  const images = [
+  let images = [
     { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
     { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
     { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
@@ -22,45 +21,39 @@ import { goto } from '$app/navigation';
     { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
   ]
 
-  let revealedCards = [];
-  let hiddenCards = 0;
+  let revealedCards = []
+  let hiddenCards = 0
 
-  
   $: if (revealedCards.length === 2) {
-
-    let first = revealedCards[0];
-    let second = revealedCards[1];
-    if(first.src === second.src){
-        first.hidden = true;
-        second.hidden = true;
-        hiddenCards += 2;
-        if(hiddenCards === images.length) {goto('result')}
+    const [first, second] = revealedCards
+    if (first.src === second.src) {
+      first.hidden = second.hidden = true
+      hiddenCards += 2
+      if (hiddenCards === images.length) {
+        images = [] // prevent weird page transition behavior
+        goto('result')
+      }
     }
-    revealedCards = [];
-    first.revealed = false;
-    second.revealed = false;
+    revealedCards = []
+    first.revealed = second.revealed = false
   }
-
 </script>
 
-<div
-  class="inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md"
->
+<div class="inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md">
   {#each images as image}
-  
     <div
       class="cursor-pointer relative rounded-md  w-14 h-14 flex flex-col justify-center"
       class:opacity-0={image.hidden}
       class:cursor-default={image.hidden}
       transition:fade
       on:click={() => {
-        if(image.hidden) {
-            return;}
-        if(!image.revealed) {
-            revealedCards = [...revealedCards, image];
-            image.revealed = !image.revealed
-            
-        } 
+        if (image.hidden) {
+          return
+        }
+        if (!image.revealed) {
+          revealedCards = [...revealedCards, image]
+          image.revealed = !image.revealed
+        }
       }}
     >
       <div class="front-face card-face bg-gray-100 border-gray-100">
