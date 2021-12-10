@@ -1,3 +1,11 @@
+<script lang="ts" context="module">
+  export const load = async ({ page }) => ({
+    props: {
+      key: page.path,
+    },
+  })
+</script>
+
 <script lang="ts">
   import { signInAnonymously } from 'firebase/auth'
   import { auth } from '../initFirebase'
@@ -6,6 +14,10 @@
   import { fade } from 'svelte/transition'
   import { prefetchRoutes } from '$app/navigation'
 
+  // Components
+  import PageTransition from '$lib/PageTransition.svelte'
+
+  export let key: string
   let particlesConfig = null
 
   onMount(async () => {
@@ -19,7 +31,9 @@
 </script>
 
 <main>
-  <slot />
+  <PageTransition refresh={key}>
+    <slot />
+  </PageTransition>
 </main>
 
 {#if particlesConfig}
