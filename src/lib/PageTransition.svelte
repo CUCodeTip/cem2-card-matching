@@ -7,7 +7,7 @@
 {#key refresh}
   <div
     class="page-transition"
-    in:fly={{ x: -5, duration: 500, delay: 750 }}
+    in:fly={{ x: -5, duration: 500, delay: 250 }}
     out:fly={{ x: 5, duration: 500 }}
   >
     <slot />
