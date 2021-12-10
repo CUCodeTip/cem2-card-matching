@@ -2,19 +2,14 @@
   import Modal from '$lib/modal.svelte'
   import TutorialContent from '$lib/tutorial_content.svelte'
 
-  let display = false //Toggle this value to false on start
+  let showModal = true // toggle this value to show/hide the modal
 </script>
 
 <h1>Game Page</h1>
-<button
-  on:click={() => {
-    display = true
-  }}>open modal</button
->
-{#if display}
+{#if showModal}
   <Modal
     on:close={() => {
-      display = false
+      showModal = false
     }}><TutorialContent /></Modal
   >
 {/if}
