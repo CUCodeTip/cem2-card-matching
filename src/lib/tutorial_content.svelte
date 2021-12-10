@@ -16,6 +16,7 @@
     width: 25rem;
   }
   img {
-    width: 80%;
+    width: 17rem;
+    margin-top: 1rem;
   }
 </style>

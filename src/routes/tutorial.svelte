@@ -5,3 +5,9 @@
 <TutorialContent />
 
 <button>Let's Play!</button>
+
+<style>
+  button {
+    margin-top: 2rem;
+  }
+</style>
