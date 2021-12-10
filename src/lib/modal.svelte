@@ -20,38 +20,43 @@
   }
 </script>
 
-<div class="modal">
-  <div
-    class="close"
-    on:mousedown={() => {
-      setActivePicture()
-    }}
-    on:mouseup={() => {
-      if (mouseIn) {
+<div class="absolute">
+  <div class="modal">
+    <div
+      class="close"
+      on:mousedown={() => {
+        setActivePicture()
+      }}
+      on:mouseup={() => {
+        if (mouseIn) {
+          setHoverPicture()
+        } else {
+          setNormalPicture()
+        }
+      }}
+      on:mouseenter={() => {
         setHoverPicture()
-      } else {
+        mouseIn = true
+      }}
+      on:mouseleave={() => {
         setNormalPicture()
-      }
-    }}
-    on:mouseenter={() => {
-      setHoverPicture()
-      mouseIn = true
-    }}
-    on:mouseleave={() => {
-      setNormalPicture()
-      mouseIn = false
-    }}
-    on:click={emitClose}
-  >
-    <img {src} alt="Colse" />
+        mouseIn = false
+      }}
+      on:click={emitClose}
+    >
+      <img {src} alt="Colse" />
+    </div>
+    <slot>deafult</slot>
   </div>
-  <slot>deafult</slot>
 </div>
 
 <style>
+  .absolute {
+    position: absolute;
+  }
   .modal {
     display: flex;
-    position: absolute;
+    position: relative;
     flex-direction: column;
     padding: 3.125rem;
     border-width: 3px;
