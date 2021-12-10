@@ -6,16 +6,12 @@
 
 {#key refresh}
   <div
-    class="page-transition"
-    in:fly={{ x: -5, duration: 500, delay: 750 }}
+    class="absolute"
+    in:fly={{ x: -5, duration: 500, delay: 500 }}
     out:fly={{ x: 5, duration: 500 }}
   >
     <slot />
   </div>
 {/key}
 
-<style>
-  .page-transition {
-    position: absolute;
-  }
-</style>
+<style></style>
