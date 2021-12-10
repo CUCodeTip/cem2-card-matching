@@ -42,6 +42,12 @@
   </div>
 {/if}
 
+<svelte:head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
+  </style>
+</svelte:head>
+
 <style windi:preflights:global windi:safelist:global>
   :root {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -66,10 +72,15 @@
 
   :global(h1) {
     @apply text-6xl text-gray-100;
+    font-family: 'Comic Boys', cursive;
+  }
+
+  :global(p) {
+    font-family: 'Gaegu', cursive;
   }
 
   :global(button) {
-    font-family: inherit;
+    font-family: 'Cream Shoes', cursive;
     font-size: inherit;
     padding: 0.8125rem 2.1875rem;
     color: var(--gray-100);
@@ -90,5 +101,15 @@
     background-color: var(--gray-400);
     border-color: var(--gray-400);
     color: var(--gray-900);
+  }
+
+  @font-face {
+    font-family: 'Comic Boys';
+    src: url('/font/ComicBoys.ttf') format('ttf');
+  }
+
+  @font-face {
+    font-family: 'Cream Shoes';
+    src: url('font/Creamshoes.ttf') format('ttf');
   }
 </style>
