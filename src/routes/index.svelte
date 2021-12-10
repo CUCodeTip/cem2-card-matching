@@ -3,7 +3,7 @@
 
 <main>
   <h1>Hello there!</h1>
-  <a href="/tutorial"><button>Let's Play!</button></a>
+  <a href="/tutorial"><button>Start</button></a>
 </main>
 
 <style>

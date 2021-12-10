@@ -1,2 +1,7 @@
-<h1>Tutorial</h1>
-<a href="play"><button>Let's Play!</button></a>
+<script>
+  import TutorialContent from '$lib/tutorial_content.svelte'
+</script>
+
+<TutorialContent />
+
+<button>Let's Play!</button>
