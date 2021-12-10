@@ -1,44 +1,66 @@
 <script>
+import { goto } from '$app/navigation';
+
   import { fade } from 'svelte/transition'
 
   const images = [
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
+    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
   ]
 
-  let revealedCards = 0
-  $: if (revealedCards === 2) {
-    // do something
+  let revealedCards = [];
+  let hiddenCards = 0;
+
+  
+  $: if (revealedCards.length === 2) {
+
+    let first = revealedCards[0];
+    let second = revealedCards[1];
+    if(first.src === second.src){
+        first.hidden = true;
+        second.hidden = true;
+        hiddenCards += 2;
+        if(hiddenCards === images.length) {goto('result')}
+    }
+    revealedCards = [];
+    first.revealed = false;
+    second.revealed = false;
   }
+
 </script>
 
 <div
   class="board inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md"
 >
   {#each images as image}
+  
     <div
-      class="box relative rounded-md  w-14 h-14 flex flex-col justify-center"
+      class="cursor-pointer relative rounded-md  w-14 h-14 flex flex-col justify-center"
+      class:opacity-0={image.hidden}
+      class:cursor-default={image.hidden}
       transition:fade
       on:click={() => {
-        image.revealed = !image.revealed
-        // if (revealedCards < 2 && !image.revealed) {
-        //   image.revealed = true
-        //   revealedCards++
-        // }
+        if(image.hidden) {
+            return;}
+        if(!image.revealed) {
+            revealedCards = [...revealedCards, image];
+            image.revealed = !image.revealed
+            
+        } 
       }}
     >
       <div class="front-face card-face bg-gray-100 border-gray-100">
@@ -72,18 +94,6 @@
     overflow: hidden;
     transition: transform 500ms ease-in-out;
     backface-visibility: hidden;
-  }
-
-  .card.visible .card-back {
-    transform: rotateY(-180deg);
-  }
-
-  .card.visible .card-front {
-    transform: rotateY(0);
-  }
-
-  .card.matched .card-front .card-value {
-    animation: dance 1s linear infinite 500ms;
   }
 
   .card-back {
