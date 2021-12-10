@@ -30,11 +30,9 @@
   })
 </script>
 
-<main>
-  <PageTransition refresh={key}>
-    <slot />
-  </PageTransition>
-</main>
+<PageTransition refresh={key}>
+  <slot />
+</PageTransition>
 
 {#if particlesConfig}
   <div in:fade>
@@ -51,17 +49,7 @@
     --gray-100: #f7fafc;
     background-color: var(--gray-900);
     color: var(--gray-100);
-  }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    overflow: hidden;
   }
 
   :global(h1) {

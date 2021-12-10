@@ -5,13 +5,23 @@
 </script>
 
 {#key refresh}
-  <div
-    class="absolute"
-    in:fly={{ x: -5, duration: 500, delay: 500 }}
-    out:fly={{ x: 5, duration: 500 }}
+  <main
+    in:fly={{ x: -10, duration: 500, delay: 500 }}
+    out:fly={{ x: 10, duration: 500 }}
   >
     <slot />
-  </div>
+  </main>
 {/key}
 
-<style></style>
+<style>
+  main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+</style>
