@@ -40,12 +40,12 @@
 </script>
 
 <div class="inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md">
-  {#each images as image}
+  {#each images as image, i}
     <div
       class="cursor-pointer relative rounded-md  w-14 h-14 flex flex-col justify-center"
       class:opacity-0={image.hidden}
       class:cursor-default={image.hidden}
-      transition:fade
+      in:fade={{ delay: (100 * i) / 2, duration: (400 * i) / 4 }}
       on:click={() => {
         if (image.hidden) {
           return
