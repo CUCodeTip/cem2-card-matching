@@ -55,14 +55,9 @@
   }
 
   main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
+    width: 100vh;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    overflow: hidden;
   }
 
   :global(h1) {
