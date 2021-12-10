@@ -49,6 +49,7 @@
     --gray-400: #cbd5e0;
     --gray-900: #1a202c;
     --gray-100: #f7fafc;
+    --font-base: 1.3rem;
     background-color: var(--gray-900);
     color: var(--gray-100);
   }
@@ -65,12 +66,16 @@
   }
 
   :global(h1) {
-    @apply text-6xl text-gray-100;
+    line-height: 1.2;
+    @apply text-4xl text-gray-100;
+    margin: 0;
   }
 
   :global(button) {
     font-family: inherit;
-    font-size: inherit;
+    font-size: x-large;
+    font-style: italic;
+    font-weight: bold;
     padding: 0.8125rem 2.1875rem;
     color: var(--gray-100);
     background-color: var(--gray-900);
@@ -90,5 +95,15 @@
     background-color: var(--gray-400);
     border-color: var(--gray-400);
     color: var(--gray-900);
+  }
+
+  :global(p) {
+    line-height: 1.6;
+    font-size: var(--font-base);
+  }
+
+  :global(span) {
+    line-height: 1.6;
+    font-size: var(--font-base);
   }
 </style>

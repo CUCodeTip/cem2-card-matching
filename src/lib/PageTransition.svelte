@@ -17,5 +17,13 @@
 <style>
   .page-transition {
     position: absolute;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 </style>
