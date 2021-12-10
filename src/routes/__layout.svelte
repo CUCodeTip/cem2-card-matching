@@ -1,23 +1,39 @@
+<script lang="ts" context="module">
+  export const load = async ({ page }) => ({
+    props: {
+      key: page.path,
+    },
+  })
+</script>
+
 <script lang="ts">
   import { signInAnonymously } from 'firebase/auth'
   import { auth } from '../initFirebase'
   import { onMount } from 'svelte'
   import Particles from 'svelte-particles'
   import { fade } from 'svelte/transition'
+  import { prefetchRoutes } from '$app/navigation'
 
+  // Components
+  import PageTransition from '$lib/PageTransition.svelte'
+
+  export let key: string
   let particlesConfig = null
 
   onMount(async () => {
     // This needs to be imported on client only or else Vite complains about window not being defined
     particlesConfig = (await import('../particlesConfig')).default
-    console.log('object')
     // request.auth cannot be null when interacting with firestore, see firestore.rules
     await signInAnonymously(auth)
+    // prefetch routes to to speed up subsequent navigation
+    prefetchRoutes()
   })
 </script>
 
 <main>
-  <slot />
+  <PageTransition refresh={key}>
+    <slot />
+  </PageTransition>
 </main>
 
 {#if particlesConfig}
