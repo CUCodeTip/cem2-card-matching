@@ -1,14 +1,11 @@
 <script lang="ts">
 </script>
 
-<main>
-  <div>
-    <h1>Website Title</h1>
-    <p>Erat dolor sed risus nulla amet scelerisque.</p>
-  </div>
-
-  <a href="/tutorial"><button>Start</button></a>
-</main>
+<div>
+  <h1>Website Title</h1>
+  <p>Erat dolor sed risus nulla amet scelerisque.</p>
+</div>
+<a href="/tutorial"><button>Start</button></a>
 
 <style>
   h1 {
