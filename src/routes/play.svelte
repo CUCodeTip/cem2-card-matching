@@ -31,7 +31,8 @@
       hiddenCards += 2
       if (hiddenCards === images.length) {
         images = [] // prevent weird page transition behavior
-        goto('result')
+        // replaceState to prevent going back to the game, doesn't work?
+        goto('result', { replaceState: true })
       }
     }
     revealedCards = []
