@@ -44,7 +44,7 @@ import { goto } from '$app/navigation';
 </script>
 
 <div
-  class="board inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md"
+  class="inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md"
 >
   {#each images as image}
   
@@ -78,10 +78,6 @@ import { goto } from '$app/navigation';
 </div>
 
 <style>
-  .box {
-    cursor: pointer;
-  }
-
   .card-face {
     position: absolute;
     display: flex;
