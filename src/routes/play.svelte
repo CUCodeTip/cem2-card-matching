@@ -8,7 +8,7 @@
   import images from '../images'
 
   let revealedCards = []
-  let hiddenCards = 0
+  let removedCards = 0
   let showModal = false // toggle this value to show/hide the modal
 
   // measure these
@@ -19,10 +19,13 @@
     const [first, second] = revealedCards
     if (first.src === second.src) {
       first.hidden = second.hidden = true
-      hiddenCards += 2
+      // If the cards match, hide them without delay,
+      // unlike the set time out
+      removedCards += 2
       revealedCards = []
+
       first.revealed = second.revealed = false
-      if (hiddenCards === $images.length) {
+      if (removedCards === $images.length) {
         // save result to the result store
         measuredResult.set({
           clicks,
@@ -75,13 +78,15 @@
           }
         }}
       >
-        <div class="front-face card-face bg-gray-100 border border-gray-100">
+        <div
+          class="front-face card-face overflow-hidden bg-gray-100 border border-gray-100"
+        >
           {#if image.revealed}
             <img
               transition:fade={{ duration: 100 }}
               src={image.src}
               alt={image.alt}
-              class="back-face w-full object-cover object-center"
+              class="back-face h-full w-full object-cover object-center"
             />
           {/if}
         </div>
@@ -100,9 +105,9 @@
     height: 100%;
     border-radius: 12px;
     border-style: solid;
-    overflow: hidden;
+    overflow: removed;
     transition: transform 500ms ease-in-out;
-    backface-visibility: hidden;
+    backface-visibility: removed;
   }
 
   .card-back {
