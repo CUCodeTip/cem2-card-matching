@@ -26,7 +26,6 @@
   // changes on page navigation, trigger page transition
   export let pagePath: string
 
-  let particlesConfig = null
   let toggleSoundIcon = false
 
   function toggleSound() {
@@ -72,11 +71,11 @@
   </PageTransition>
 </main>
 
-{#if particlesConfig}
-  <div in:fade>
-    <Particles id="tsparticles" options={particlesConfig} />
-  </div>
-{/if}
+<!-- {#if particlesConfig} -->
+<div in:fade>
+  <Particles id="tsparticles" options={particlesConfig} />
+</div>
+<!-- {/if} -->
 
 <svelte:head>
   <style>
