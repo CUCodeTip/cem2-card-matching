@@ -1,13 +1,12 @@
 <script>
-  import { cubicOut } from 'svelte/easing'
   import { createEventDispatcher } from 'svelte'
+  import { scale } from 'svelte/transition'
 
   let src = '/Close.png'
   let mouseIn = false
   const dispatch = createEventDispatcher()
 
   function emitClose() {
-    //Use: <Inner on:close={display state}/>
     dispatch('close')
   }
   function setNormalPicture() {
@@ -19,37 +18,9 @@
   function setActivePicture() {
     src = '/Close_active.png'
   }
-
-  function zoomIn(node, { duration }) {
-    return {
-      duration,
-      css: (t) => {
-        const eased = cubicOut(t)
-        return `
-					transform: scale(${eased}) ;
-          
-          `
-      },
-    }
-  }
-  function zoomOut(node, { duration }) {
-    return {
-      duration,
-      css: (t) => {
-        return `
-					transform: scale(${t}) ;
-          opacity: ${t}; 
-          `
-      },
-    }
-  }
 </script>
 
-<div
-  class="absolute"
-  in:zoomIn={{ duration: 500 }}
-  out:zoomOut={{ duration: 200 }}
->
+<div class="absolute" in:scale={{ start: 0.5 }} out:scale>
   <div class="modal">
     <div
       class="close"
