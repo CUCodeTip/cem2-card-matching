@@ -37,7 +37,7 @@
     // shuffle images if the user has already submitted
     if (
       hasSubmittedLocally(auth.currentUser.uid) ||
-      hasSubmittedToFirestore(auth.currentUser.uid)
+      (await hasSubmittedToFirestore(auth.currentUser.uid))
     )
       images.shuffle()
   })
