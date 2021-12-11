@@ -20,15 +20,12 @@
     preloadImages,
   } from '../utils'
   import images from '../images'
+  import particlesConfig from '../particlesConfig'
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
 
-  let particlesConfig = null
-
   onMount(async () => {
-    // This needs to be imported on client only or else Vite complains about window not being defined
-    particlesConfig = (await import('../particlesConfig')).default
     // request.auth cannot be null when interacting with firestore, see firestore.rules
     await signInAnonymously(auth)
     // prefetch routes and preload images to speed things up
@@ -51,7 +48,7 @@
 
 {#if particlesConfig}
   <div in:fade>
-    <Particles id="tsparticles" options={$particlesConfig} />
+    <Particles id="tsparticles" options={particlesConfig} />
   </div>
 {/if}
 
