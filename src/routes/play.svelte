@@ -6,20 +6,29 @@
   import Icon from '@iconify/svelte'
   import measuredResult from '../resultStore'
   import images from '../images'
+  import { onMount } from 'svelte'
+import { playCardMatchedSound} from '../utils';
 
   let revealedCards = []
   let removedCards = 0
   let showModal = false // toggle this value to show/hide the modal
 
+
   // measure these
   let clicks = 0
   let startTime = null
+  let playCardMatched
+
+  onMount(()=> {
+    playCardMatched = playCardMatchedSound()
+  })
 
   $: if (revealedCards.length === 2) {
     const [first, second] = revealedCards
     if (first.src === second.src) {
       first.hidden = second.hidden = true
       removedCards += 2
+      playCardMatched()
       if (removedCards === $images.length) {
         // save result to the result store
         measuredResult.set({
@@ -37,6 +46,8 @@
 
   const toggleModal = () => (showModal = !showModal)
 </script>
+
+<audio id="cardMatchedSound" src="some_audio.mp3"></audio>
 
 {#if showModal}
   <Modal on:close={toggleModal}><TutorialContent /></Modal>

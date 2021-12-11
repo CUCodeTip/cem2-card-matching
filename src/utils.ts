@@ -76,3 +76,15 @@ export const preloadImages = async (
   })
   return Promise.all(onLoads)
 }
+
+export function playCardMatchedSound() {
+  const cardMatchedSound = new Audio('./sounds/card-matched.wav')
+  cardMatchedSound.volume = 0.25
+  return () => {
+    cardMatchedSound.play()
+    // console.log(cardMatchedSound.currentTime);
+    if (cardMatchedSound.currentTime == 0.3) {
+      cardMatchedSound.pause()
+    }
+  }
+}
