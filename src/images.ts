@@ -1,7 +1,5 @@
 import { writable } from 'svelte/store'
-import { auth } from './initFirebase'
 import type { ImageData } from './types'
-import { hasSubmittedLocally, hasSubmittedToFirestore } from './utils'
 
 const img1 =
   'https://i.pinimg.com/564x/1d/83/a6/1d83a6d88d8be5b041a9a98fd5048311.jpg'
