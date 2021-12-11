@@ -18,7 +18,7 @@
   onMount(() => {
     setTimeout(() => {
       pageContent = [Annoucnement, ReplayButton]
-    }, 1500)
+    }, 2000)
   })
 </script>
 
