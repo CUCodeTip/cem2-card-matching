@@ -7,7 +7,8 @@
   import measuredResult from '../resultStore'
   import images from '../images'
   import { onMount } from 'svelte'
-  import { getCardMatchedSound, getVictorySound } from '../utils'
+  import { getCardMatchedSound, getRandomMode, getVictorySound } from '../utils'
+  import { saveTest } from '../firestoreActions'
 
   let revealedCards = []
   let removedCards = 0
@@ -18,11 +19,9 @@
   // measure these
   let clicks = 0
   let startTime = null
+  // with the mode
+  const mode = getRandomMode()
 
-  onMount(() => {
-    playCardMatched = getCardMatchedSound()
-    playVictory = getVictorySound()
-  })
   // delay when the image is about to be hidden
   const transitionDelay = 500
 
@@ -35,15 +34,16 @@
       if (removedCards === $images.length) {
         playVictory()
         // save result to the result store
-        measuredResult.set({
-          clicks,
-          duration: Date.now() - startTime,
+        const duration = Date.now() - startTime
+        measuredResult.set({ clicks, duration })
+        // save result to firestore, then go to the result page
+        saveTest({ clicks, duration, mode }).then(() => {
+          setTimeout(async () => {
+            // replaceState to prevent going back to the game, doesn't work?
+            await goto('result', { replaceState: true })
+            images.clear()
+          }, transitionDelay + 500)
         })
-        // replaceState to prevent going back to the game, doesn't work?
-        setTimeout(async () => {
-          await goto('result', { replaceState: true })
-          images.clear()
-        }, transitionDelay + 500)
       } else playCardMatched()
     } else
       setTimeout(() => {
@@ -53,6 +53,11 @@
   }
 
   const toggleModal = () => (showModal = !showModal)
+
+  onMount(() => {
+    playCardMatched = getCardMatchedSound()
+    playVictory = getVictorySound()
+  })
 </script>
 
 <audio id="cardMatchedSound" src="some_audio.mp3" />
@@ -96,14 +101,14 @@
           <div
             class="front-face card-face overflow-hidden bg-gray-100 border border-gray-100 hover:bg-gray-400"
           >
-            {#if image.revealed}
-              <img
-                transition:fade={{ duration: 100 }}
-                src={image.src}
-                alt={image.alt}
-                class="back-face h-full w-full object-cover object-center"
-              />
-            {/if}
+            <!-- {#if image.revealed} -->
+            <img
+              transition:fade={{ duration: 100 }}
+              src={image.src}
+              alt={image.alt}
+              class="back-face h-full w-full object-cover object-center"
+            />
+            <!-- {/if} -->
           </div>
         </div>
       {/each}

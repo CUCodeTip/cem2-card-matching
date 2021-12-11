@@ -1,5 +1,6 @@
 import { getDoc, doc } from 'firebase/firestore'
 import { db } from './initFirebase'
+import type { Mode } from './types'
 
 /**
  * @returns user ids in _localStorage_ that has submitted a test
@@ -95,4 +96,8 @@ export function getVictorySound() {
   return () => {
     victorySound.play()
   }
+}
+
+export const getRandomMode = (): Mode => {
+  return Math.random() < 0.5 ? 'easy' : 'hard'
 }

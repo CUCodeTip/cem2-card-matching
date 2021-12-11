@@ -29,7 +29,7 @@ export const saveTest = async (payload: TestDocument): Promise<void> => {
   }
 
   const userId = auth.currentUser.uid
-  if (hasSubmittedAlready(userId)) return
+  if (await hasSubmittedAlready(userId)) return
 
   // saves the test result
   await setDoc(doc(db, 'tests', userId), payload)
