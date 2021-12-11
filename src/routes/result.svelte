@@ -1,12 +1,24 @@
 <script lang="ts">
+  import { goto } from '$app/navigation'
+
+  import { onMount } from 'svelte'
+
+  import measuredResult from '../resultStore'
   import { getTimeinMinuteFormat } from '../utils'
 
   // Get score from play page
   const cardCount = 16
-  let time = 62000
-  let clickCount = 20
-  const { minute, second } = getTimeinMinuteFormat(time)
-  const secondText = ('0' + second).slice(0, 2)
+  let minute: number, second: number
+  // This doesn't work somehow
+  // $: { minute, second } = getTimeinMinuteFormat($measuredResult.duration)
+  $: {
+    const { minute: min, second: sec } = getTimeinMinuteFormat(
+      $measuredResult.duration
+    )
+    minute = min
+    second = sec
+  }
+  $: secondText = ('0' + second).slice(0, 2)
 
   // time unit is milli second
   const calculateScore = (time: number, clickCount: number) => {
@@ -19,31 +31,38 @@
   }
 
   const getCongratText = (score: number) => {
-    let text = ''
     if (score >= 9500) {
-      text = 'You are the god!'
+      return 'You are the god!'
     } else if (score >= 8000) {
-      text = 'Excellent!'
+      return 'Excellent!'
     } else if (score >= 6000) {
-      text = 'Good job!'
+      return 'Good job!'
     } else if (score >= 3500) {
-      text = 'Not bad Not bad, but try harder next time...'
+      return 'Not bad Not bad, but try harder next time...'
     } else {
-      text = 'May be today is not your day...'
+      return 'May be today is not your day...'
     }
-    return text
   }
 
-  $: score = calculateScore(time, clickCount)
+  $: score = calculateScore($measuredResult.duration, $measuredResult.clicks)
   $: congratText = getCongratText(score)
+
+  onMount(() => {
+    // if there is no result, go back to the home page
+    if (!$measuredResult.duration) {
+      goto('/', { replaceState: true })
+    }
+  })
 </script>
 
-<h1 class="mb-4">{congratText}</h1>
-<p>
-  You took {clickCount} clicks to finish.<br />
-  Total time taken {`${minute}:${secondText}`} minutes.<br />
-  Your score is {score}
-</p>
+{#if $measuredResult.duration}
+  <h1 class="mb-4">{congratText}</h1>
+  <p>
+    You took {$measuredResult.clicks} clicks to finish.<br />
+    Total time taken {`${minute}:${secondText}`}<br />
+    Your score is {score}
+  </p>
+{/if}
 
 <style>
 </style>

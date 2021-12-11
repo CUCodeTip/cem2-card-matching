@@ -4,6 +4,7 @@
   import Modal from '$lib/modal.svelte'
   import TutorialContent from '$lib/tutorial_content.svelte'
   import Icon from '@iconify/svelte'
+  import measuredResult from '../resultStore'
 
   let images = [
     { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
@@ -28,12 +29,21 @@
   let hiddenCards = 0
   let showModal = false // toggle this value to show/hide the modal
 
+  // measure these
+  let clicks = 0
+  let startTime = null
+
   $: if (revealedCards.length === 2) {
     const [first, second] = revealedCards
     if (first.src === second.src) {
       first.hidden = second.hidden = true
       hiddenCards += 2
       if (hiddenCards === images.length) {
+        // save result to the result store
+        measuredResult.set({
+          clicks,
+          duration: Date.now() - startTime,
+        })
         images = [] // prevent weird page transition behavior
         // replaceState to prevent going back to the game, doesn't work?
         goto('result', { replaceState: true })
@@ -74,6 +84,10 @@
             // Pushing to to revealedCards doesn't seem to break the reactive statement
             revealedCards.push(image)
             image.revealed = !image.revealed
+            clicks++
+            if (!startTime) {
+              startTime = Date.now()
+            }
           }
         }}
       >

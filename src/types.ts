@@ -1,10 +1,13 @@
 export type Mode = 'easy' | 'hard'
 
+export interface MeasuredResult {
+  clicks?: number
+  duration?: number // in milliseconds
+}
+
 /**
  * Firestore document schema for those in **tests** collection
  */
-export interface TestDocument {
-  clicks: number
-  duration: number // in milliseconds
+export type TestDocument = {
   mode: Mode
-}
+} & MeasuredResult
