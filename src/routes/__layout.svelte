@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   export const load = async ({ page }) => ({
     props: {
-      key: page.path,
+      pagePath: page.path,
     },
   })
 </script>
@@ -13,11 +13,12 @@
   import Particles from 'svelte-particles'
   import { fade } from 'svelte/transition'
   import { prefetchRoutes } from '$app/navigation'
-
-  // Components
   import PageTransition from '$lib/PageTransition.svelte'
+  import { preloadImages } from '../utils'
 
-  export let key: string
+  // changes on page navigation, trigger page transition
+  export let pagePath: string
+
   let particlesConfig = null
 
   onMount(async () => {
@@ -25,13 +26,14 @@
     particlesConfig = (await import('../particlesConfig')).default
     // request.auth cannot be null when interacting with firestore, see firestore.rules
     await signInAnonymously(auth)
-    // prefetch routes to to speed up subsequent navigation
+    // prefetch routes and preload images to speed things up
     prefetchRoutes()
+    preloadImages()
   })
 </script>
 
 <main>
-  <PageTransition refresh={key}>
+  <PageTransition refresh={pagePath}>
     <slot />
   </PageTransition>
 </main>
@@ -55,33 +57,36 @@
     --gray-400: #cbd5e0;
     --gray-900: #1a202c;
     --gray-100: #f7fafc;
+    --font-base: 1.3rem;
     background-color: var(--gray-900);
     color: var(--gray-100);
   }
 
   main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
+    width: 100vh;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    overflow: hidden;
   }
 
   :global(h1) {
     @apply text-6xl text-gray-100;
     font-family: 'Comic Boys', cursive;
+    line-height: 1.2;
+    font-weight: bold;
+    margin: 0;
   }
 
   :global(p) {
     font-family: 'Gaegu', cursive;
+    line-height: 1.6;
+    font-size: var(--font-base);
   }
 
   :global(button) {
     font-family: 'Cream Shoes', cursive;
-    font-size: inherit;
+    font-size: x-large;
+    font-style: italic;
+    font-weight: bold;
     padding: 0.8125rem 2.1875rem;
     color: var(--gray-100);
     background-color: var(--gray-900);
@@ -101,6 +106,11 @@
     background-color: var(--gray-400);
     border-color: var(--gray-400);
     color: var(--gray-900);
+  }
+  
+  :global(span) {
+    line-height: 1.6;
+    font-size: var(--font-base);
   }
 
   @font-face {

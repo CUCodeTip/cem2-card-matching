@@ -36,3 +36,43 @@ export const hasSubmittedToFirestore = async (userId: string) => {
   const testDoc = await getDoc(doc(db, 'tests', userId))
   return testDoc.exists()
 }
+
+/**
+ * Convert time in millisecond unit to minute and second unit
+ * @param millisecond
+ * @returns {minute, second} the object that stores time in minute and second format
+ */
+export const getTimeinMinuteFormat = (
+  milliseconds: number
+): { minute: number; second: number } => {
+  const minute = Math.floor(milliseconds / (60 * 1000))
+  const second = Math.floor((milliseconds % (60 * 1000)) / 1000)
+  return { minute, second }
+}
+
+/**
+ * Preload images beforehand to prevent lag
+ * @param images Image url or array of image url to preload
+ * @returns Promise that resolves when all images are loaded
+ */
+export const preloadImages = async (
+  images: string[] | string = [
+    '/Close_active.png',
+    '/Close_hover.png',
+    '/Close.png',
+    'Tutorial.png',
+  ]
+): Promise<unknown[]> => {
+  // resolve on load of all images
+  if (typeof images === 'string') {
+    images = [images]
+  }
+  const onLoads = images.map((image) => {
+    return new Promise((resolve) => {
+      const img = new Image()
+      img.onload = resolve
+      img.src = image
+    })
+  })
+  return Promise.all(onLoads)
+}
