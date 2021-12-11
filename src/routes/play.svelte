@@ -55,10 +55,10 @@
     <Icon icon="mdi:information-outline" width="30" />
   </i>
 
-  <div class="inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md">
+  <div class="inline-grid gap-x-2 gap-y-2 grid-cols-4 grid-rows-4 rounded-md">
     {#each $images as image, i}
       <div
-        class="cursor-pointer relative rounded-md w-14 h-14 flex flex-col 
+        class="cursor-pointer relative w-26 h-26 flex flex-col 
     justify-center transition-opacity delay-500 duration-200 ease-in-out"
         class:opacity-0={image.hidden}
         class:cursor-default={image.hidden || revealedCards.length === 2}
@@ -101,7 +101,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
+    border-radius: 20%;
     border-style: solid;
     overflow: removed;
     transition: transform 500ms ease-in-out;
