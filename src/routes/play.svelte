@@ -7,19 +7,21 @@
   import measuredResult from '../resultStore'
   import images from '../images'
   import { onMount } from 'svelte'
-  import { playCardMatchedSound } from '../utils'
+  import { getCardMatchedSound, getVictorySound } from '../utils'
 
   let revealedCards = []
   let removedCards = 0
   let showModal = false // toggle this value to show/hide the modal
   let playCardMatched
+  let playVictory
 
   // measure these
   let clicks = 0
   let startTime = null
 
   onMount(() => {
-    playCardMatched = playCardMatchedSound()
+    playCardMatched = getCardMatchedSound()
+    playVictory = getVictorySound()
   })
   // delay when the image is about to be hidden
   const transitionDelay = 500
@@ -29,9 +31,9 @@
     if (first.src === second.src) {
       first.hidden = second.hidden = true
       removedCards += 2
-      playCardMatched()
       revealedCards = []
       if (removedCards === $images.length) {
+        playVictory()
         // save result to the result store
         measuredResult.set({
           clicks,
@@ -42,7 +44,7 @@
           await goto('result', { replaceState: true })
           images.clear()
         }, transitionDelay + 10)
-      }
+      } else playCardMatched()
     } else
       setTimeout(() => {
         revealedCards = []

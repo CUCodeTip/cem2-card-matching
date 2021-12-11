@@ -1,17 +1,19 @@
 import { writable } from 'svelte/store'
 
 const bgm = new Audio('./sounds/bgm.mp3')
-bgm.volume = 0.2
+bgm.volume = 0.04
 bgm.loop = true
 bgm.currentTime = 41
 
+// this tells that the audio has started
+const started = writable(false)
+
 const createAudioStore = () => {
   const { subscribe, update } = writable(bgm)
-
   const play = () => {
     update((audio) => {
       audio.play()
-
+      started.set(true)
       return audio
     })
   }
@@ -36,4 +38,4 @@ const createAudioStore = () => {
 }
 
 const audio = createAudioStore()
-export default audio
+export default { audio, started }

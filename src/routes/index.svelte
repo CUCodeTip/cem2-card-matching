@@ -7,12 +7,14 @@
 
   let pageContent = [LandingContent]
   let audio = null
+
   onMount(async () => {
     setTimeout(() => {
       pageContent = [LandingContent, StartButton]
     }, 1500)
 
-    audio = (await import('../sounds')).default
+    const { audio: a } = (await import('../sounds')).default
+    audio = a
   })
 </script>
 

@@ -26,14 +26,15 @@
   // changes on page navigation, trigger page transition
   export let pagePath: string
 
-  let isBgmAudible = false
+  let isSoundAudible = false
   let audio = null
+  let audioStarted = null
 
   const toggleSound = () => {
     if (audio.ended === false) audio.play()
-    else if (!isBgmAudible) audio.mute()
+    else if (!isSoundAudible) audio.mute()
     else audio.resume()
-    isBgmAudible = !isBgmAudible
+    isSoundAudible = !isSoundAudible
   }
 
   onMount(async () => {
@@ -49,26 +50,32 @@
     )
       images.shuffle()
     // the audio store uses the Audio object which exists only on browsers
-    audio = (await import('../sounds')).default
+    const { audio: a, started: s } = (await import('../sounds')).default
+    audio = a
+    audioStarted = s
   })
 </script>
 
-{#if !isBgmAudible}
-  <i
-    on:click={toggleSound}
-    class="absolute top-5 right-5 cursor-pointer z-5
-    opacity-75 hover:opacity-100 transition-opacity"
-  >
-    <Icon icon="akar-icons:sound-on" color="white" width="30" />
-  </i>
-{:else}
-  <i
-    on:click={toggleSound}
-    class="absolute top-5 right-5 cursor-pointer z-5
-    opacity-75 hover:opacity-100 transition-opacity"
-  >
-    <Icon icon="akar-icons:sound-off" color="#ccc" width="30" />
-  </i>
+{#if $audioStarted}
+  <div in:fade>
+    {#if !isSoundAudible}
+      <i
+        on:click={toggleSound}
+        class="absolute top-5 right-5 cursor-pointer z-5
+      opacity-75 hover:opacity-100 transition-opacity"
+      >
+        <Icon icon="akar-icons:sound-on" color="white" width="30" />
+      </i>
+    {:else}
+      <i
+        on:click={toggleSound}
+        class="absolute top-5 right-5 cursor-pointer z-5
+      opacity-75 hover:opacity-100 transition-opacity"
+      >
+        <Icon icon="akar-icons:sound-off" color="#ccc" width="30" />
+      </i>
+    {/if}
+  </div>
 {/if}
 
 <main>
@@ -77,11 +84,9 @@
   </PageTransition>
 </main>
 
-<!-- {#if particlesConfig} -->
 <div in:fade>
   <Particles id="tsparticles" options={particlesConfig} />
 </div>
-<!-- {/if} -->
 
 <svelte:head>
   <style>
