@@ -68,24 +68,24 @@
   }
 
   :global(h1) {
-    @apply text-6xl text-gray-100;
+    @apply text-7xl text-gray-100;
     font-family: 'Comic Boys', cursive;
-    line-height: 1.2;
-    font-weight: bold;
+    line-height: 4.5rem;
+    font-weight: normal;
     margin: 0;
   }
 
   :global(p, span) {
-    font-family: 'Gaegu', cursive;
     @apply text-3xl;
+    font-family: 'Gaegu', cursive;
   }
 
   :global(button) {
     font-family: 'Cream Shoes', cursive;
-    font-size: x-large;
-    font-style: italic;
-    font-weight: bold;
-    padding: 0.8125rem 2.1875rem;
+    font-size: 3rem;
+    font-weight: normal;
+    line-height: 3.55rem;
+    padding: 0.4125rem 2.1875rem;
     color: var(--gray-100);
     background-color: var(--gray-900);
     border-radius: 30px;
@@ -108,11 +108,11 @@
 
   @font-face {
     font-family: 'Comic Boys';
-    src: url('/font/ComicBoys.ttf') format('ttf');
+    src: url('/fonts/ComicBoys.ttf') format('truetype');
   }
 
   @font-face {
     font-family: 'Cream Shoes';
-    src: url('font/Creamshoes.ttf') format('ttf');
+    src: url('fonts/Creamshoes.ttf') format('truetype');
   }
 </style>
