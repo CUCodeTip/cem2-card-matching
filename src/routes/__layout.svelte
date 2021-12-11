@@ -113,6 +113,6 @@
 
   @font-face {
     font-family: 'Cream Shoes';
-    src: url('fonts/Creamshoes.ttf') format('truetype');
+    src: url('/fonts/Creamshoes.ttf') format('truetype');
   }
 </style>
