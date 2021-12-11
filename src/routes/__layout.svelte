@@ -26,10 +26,14 @@
   // changes on page navigation, trigger page transition
   export let pagePath: string
 
-  let toggleSoundIcon = false
+  let isBgmAudible = false
+  let audio = null
 
-  function toggleSound() {
-    toggleSoundIcon = !toggleSoundIcon
+  const toggleSound = () => {
+    if (audio.ended === false) audio.play()
+    else if (!isBgmAudible) audio.mute()
+    else audio.resume()
+    isBgmAudible = !isBgmAudible
   }
 
   onMount(async () => {
@@ -44,10 +48,12 @@
       (await hasSubmittedToFirestore(auth.currentUser.uid))
     )
       images.shuffle()
+    // the audio store uses the Audio object which exists only on browsers
+    audio = (await import('../sounds')).default
   })
 </script>
 
-{#if !toggleSoundIcon}
+{#if !isBgmAudible}
   <i
     on:click={toggleSound}
     class="absolute top-5 right-5 cursor-pointer z-5
