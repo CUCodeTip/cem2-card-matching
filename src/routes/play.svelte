@@ -53,7 +53,8 @@
           return
         }
         if (!image.revealed) {
-          revealedCards = [...revealedCards, image]
+          // Pushing to to revealedCards doesn't seem to break the reactive statement
+          revealedCards.push(image)
           image.revealed = !image.revealed
         }
       }}
