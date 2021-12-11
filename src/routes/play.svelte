@@ -15,6 +15,9 @@
   let clicks = 0
   let startTime = null
 
+  // delay when the image is about to be hidden
+  const transitionDelay = 500
+
   $: if (revealedCards.length === 2) {
     const [first, second] = revealedCards
     if (first.src === second.src) {
@@ -27,9 +30,11 @@
           clicks,
           duration: Date.now() - startTime,
         })
-        images.clear()
         // replaceState to prevent going back to the game, doesn't work?
-        goto('result', { replaceState: true })
+        setTimeout(async () => {
+          await goto('result', { replaceState: true })
+          images.clear()
+        }, transitionDelay + 10)
       }
     } else
       setTimeout(() => {
@@ -39,8 +44,6 @@
   }
 
   const toggleModal = () => (showModal = !showModal)
-
-  $: console.log($measuredResult.duration)
 </script>
 
 {#if showModal}
@@ -59,8 +62,9 @@
     {#each $images as image, i}
       <div
         class="cursor-pointer relative w-26 h-26 flex flex-col 
-    justify-center transition-opacity delay-500 duration-200 ease-in-out"
+    justify-center transition-opacity duration-200 ease-in-out"
         class:opacity-0={image.hidden}
+        style={`transition-delay: ${transitionDelay}ms`}
         class:cursor-default={image.hidden || revealedCards.length === 2}
         in:fade={{ delay: (100 * i) / 2, duration: (400 * i) / 4 }}
         on:click={() => {
@@ -79,14 +83,14 @@
         <div
           class="front-face card-face overflow-hidden bg-gray-100 border border-gray-100 hover:bg-gray-400"
         >
-          {#if image.revealed}
-            <img
-              transition:fade={{ duration: 100 }}
-              src={image.src}
-              alt={image.alt}
-              class="back-face h-full w-full object-cover object-center"
-            />
-          {/if}
+          <!-- {#if image.revealed} -->
+          <img
+            transition:fade={{ duration: 100 }}
+            src={image.src}
+            alt={image.alt}
+            class="back-face h-full w-full object-cover object-center"
+          />
+          <!-- {/if} -->
         </div>
       </div>
     {/each}
