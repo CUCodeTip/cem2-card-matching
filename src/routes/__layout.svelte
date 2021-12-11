@@ -14,7 +14,12 @@
   import { fade } from 'svelte/transition'
   import { prefetchRoutes } from '$app/navigation'
   import PageTransition from '$lib/PageTransition.svelte'
-  import { preloadImages } from '../utils'
+  import {
+    hasSubmittedLocally,
+    hasSubmittedToFirestore,
+    preloadImages,
+  } from '../utils'
+  import images from '../images'
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
@@ -29,6 +34,12 @@
     // prefetch routes and preload images to speed things up
     prefetchRoutes()
     preloadImages()
+    // shuffle images if the user has already submitted
+    if (
+      hasSubmittedLocally(auth.currentUser.uid) ||
+      (await hasSubmittedToFirestore(auth.currentUser.uid))
+    )
+      images.shuffle()
   })
 </script>
 

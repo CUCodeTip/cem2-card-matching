@@ -11,3 +11,10 @@ export interface MeasuredResult {
 export type TestDocument = {
   mode: Mode
 } & MeasuredResult
+
+export type ImageData = {
+  src: string
+  alt: string
+  revealed: boolean
+  hidden: boolean
+}
