@@ -14,18 +14,17 @@
     second = sec
   }
   $: secondText = second < 10 ? `0${second}` : second
-  $: cardCount = $images.length
   $: score = calculateScore($measuredResult.duration, $measuredResult.clicks)
   $: congratText = getCongratText(score)
 
   // time unit is milli second
   const calculateScore = (time: number, clickCount: number) => {
-    // if player spend time more than one minute, deduce 20 points per second
+    // if player spend time more than 30 second, deduce 50 points per second
     const timePenalty =
-      time < 60000 ? 1 : Math.floor((time - 60000) / 1000) * 50
+      time < 30000 ? 1 : Math.floor((time - 30000) / 1000) * 50
     const clickPenalty =
-      clickCount < 1.5 * cardCount ? 0 : (clickCount - 1.5 * cardCount) * 100
-    return 10000 - timePenalty - clickPenalty
+      clickCount < 1.5 * 16 ? 0 : (clickCount - 1.5 * 16) * 100
+    return Math.max(0, 10000 - timePenalty - clickPenalty)
   }
 
   const getCongratText = (score: number) => {
@@ -36,9 +35,9 @@
     } else if (score >= 6000) {
       return 'Good job!'
     } else if (score >= 3500) {
-      return 'Not bad Not bad, but try harder next time...'
+      return 'You can do better!'
     } else {
-      return 'May be today is not your day...'
+      return "May be Today isn't your"
     }
   }
 </script>
