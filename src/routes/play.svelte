@@ -26,7 +26,7 @@
           clicks,
           duration: Date.now() - startTime,
         })
-        images.set([]) // prevent weird page transition behavior
+        images.clear()
         // replaceState to prevent going back to the game, doesn't work?
         goto('result', { replaceState: true })
       }
