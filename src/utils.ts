@@ -76,3 +76,15 @@ export const preloadImages = async (
   })
   return Promise.all(onLoads)
 }
+
+//play a sound when both cards are identical
+export function playCardMatchedSound() {
+  const cardMatchedSound = new Audio('./sounds/card-matched.wav')
+  const cardMatchedSound2 = new Audio('./sounds/card-matched.wav')
+  cardMatchedSound.volume = 0.05
+  cardMatchedSound2.volume = 0.05
+  return () => {
+    if (!cardMatchedSound.paused) cardMatchedSound2.play()
+    else cardMatchedSound.play()
+  }
+}

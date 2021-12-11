@@ -14,6 +14,7 @@
   import { fade } from 'svelte/transition'
   import { prefetchRoutes } from '$app/navigation'
   import PageTransition from '$lib/PageTransition.svelte'
+  import Icon from '@iconify/svelte'
   import {
     hasSubmittedLocally,
     hasSubmittedToFirestore,
@@ -24,6 +25,16 @@
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
+
+  let isBgmAudible = false
+  let audio = null
+
+  const toggleSound = () => {
+    if (audio.ended === false) audio.play()
+    else if (!isBgmAudible) audio.mute()
+    else audio.resume()
+    isBgmAudible = !isBgmAudible
+  }
 
   onMount(async () => {
     // request.auth cannot be null when interacting with firestore, see firestore.rules
@@ -37,8 +48,28 @@
       (await hasSubmittedToFirestore(auth.currentUser.uid))
     )
       images.shuffle()
+    // the audio store uses the Audio object which exists only on browsers
+    audio = (await import('../sounds')).default
   })
 </script>
+
+{#if !isBgmAudible}
+  <i
+    on:click={toggleSound}
+    class="absolute top-5 right-5 cursor-pointer z-5
+    opacity-75 hover:opacity-100 transition-opacity"
+  >
+    <Icon icon="akar-icons:sound-on" color="white" width="30" />
+  </i>
+{:else}
+  <i
+    on:click={toggleSound}
+    class="absolute top-5 right-5 cursor-pointer z-5
+    opacity-75 hover:opacity-100 transition-opacity"
+  >
+    <Icon icon="akar-icons:sound-off" color="#ccc" width="30" />
+  </i>
+{/if}
 
 <main>
   <PageTransition refresh={pagePath}>
@@ -46,11 +77,11 @@
   </PageTransition>
 </main>
 
-{#if particlesConfig}
-  <div in:fade>
-    <Particles id="tsparticles" options={particlesConfig} />
-  </div>
-{/if}
+<!-- {#if particlesConfig} -->
+<div in:fade>
+  <Particles id="tsparticles" options={particlesConfig} />
+</div>
+<!-- {/if} -->
 
 <svelte:head>
   <style>

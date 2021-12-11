@@ -6,16 +6,18 @@
   import { fly } from 'svelte/transition'
 
   let pageContent = [LandingContent]
-
-  onMount(() => {
+  let audio = null
+  onMount(async () => {
     setTimeout(() => {
       pageContent = [LandingContent, StartButton]
-    }, 2000)
+    }, 1500)
+
+    audio = (await import('../sounds')).default
   })
 </script>
 
 {#each pageContent as component (component)}
-  <div in:fly={{ y: 20 }} animate:flip>
+  <div on:click={audio.play()} in:fly={{ y: 20 }} animate:flip>
     <svelte:component this={component} />
   </div>
 {/each}
