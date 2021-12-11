@@ -43,7 +43,7 @@
         setTimeout(async () => {
           await goto('result', { replaceState: true })
           images.clear()
-        }, transitionDelay + 10)
+        }, transitionDelay + 500)
       } else playCardMatched()
     } else
       setTimeout(() => {
@@ -96,14 +96,14 @@
           <div
             class="front-face card-face overflow-hidden bg-gray-100 border border-gray-100 hover:bg-gray-400"
           >
-            <!-- {#if image.revealed} -->
-            <img
-              transition:fade={{ duration: 100 }}
-              src={image.src}
-              alt={image.alt}
-              class="back-face h-full w-full object-cover object-center"
-            />
-            <!-- {/if} -->
+            {#if image.revealed}
+              <img
+                transition:fade={{ duration: 100 }}
+                src={image.src}
+                alt={image.alt}
+                class="back-face h-full w-full object-cover object-center"
+              />
+            {/if}
           </div>
         </div>
       {/each}
