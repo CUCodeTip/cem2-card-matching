@@ -77,14 +77,24 @@ export const preloadImages = async (
   return Promise.all(onLoads)
 }
 
+//play a sound when both cards are identical
 export function playCardMatchedSound() {
   const cardMatchedSound = new Audio('./sounds/card-matched.wav')
-  cardMatchedSound.volume = 0.25
+  const cardMatchedSound2 = new Audio('./sounds/card-matched.wav')
+  cardMatchedSound.volume = 0.05
+  cardMatchedSound2.volume = 0.05
   return () => {
-    cardMatchedSound.play()
-    // console.log(cardMatchedSound.currentTime);
-    if (cardMatchedSound.currentTime == 0.3) {
-      cardMatchedSound.pause()
-    }
+    if (!cardMatchedSound.paused) cardMatchedSound2.play()
+    else cardMatchedSound.play()
   }
+}
+
+//play a sound when user clicks 'Start' button
+export function playBGM() {
+  const bgm = new Audio('./sounds/bgm.mp3')
+  bgm.volume = 0.2
+  bgm.loop = true
+  bgm.currentTime = 41
+  bgm.play()
+  console.log(bgm.currentTime)
 }

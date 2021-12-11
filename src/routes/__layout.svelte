@@ -20,6 +20,7 @@
   export let pagePath: string
 
   let particlesConfig = null
+  let playbgm
 
   onMount(async () => {
     // This needs to be imported on client only or else Vite complains about window not being defined

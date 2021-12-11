@@ -7,19 +7,18 @@
   import measuredResult from '../resultStore'
   import images from '../images'
   import { onMount } from 'svelte'
-import { playCardMatchedSound} from '../utils';
+  import { playCardMatchedSound } from '../utils'
 
   let revealedCards = []
   let removedCards = 0
   let showModal = false // toggle this value to show/hide the modal
-
+  let playCardMatched
 
   // measure these
   let clicks = 0
   let startTime = null
-  let playCardMatched
 
-  onMount(()=> {
+  onMount(() => {
     playCardMatched = playCardMatchedSound()
   })
 
@@ -47,7 +46,7 @@ import { playCardMatchedSound} from '../utils';
   const toggleModal = () => (showModal = !showModal)
 </script>
 
-<audio id="cardMatchedSound" src="some_audio.mp3"></audio>
+<audio id="cardMatchedSound" src="some_audio.mp3" />
 
 {#if showModal}
   <Modal on:close={toggleModal}><TutorialContent /></Modal>

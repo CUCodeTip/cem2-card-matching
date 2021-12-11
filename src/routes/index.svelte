@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { playBGM } from '../utils'
 </script>
 
 <div>
   <h1>Website Title</h1>
   <p>Erat dolor sed risus nulla amet scelerisque.</p>
 </div>
-<a href="/tutorial"><button>Start</button></a>
+<a href="/tutorial"><button on:click={playBGM}>Start</button></a>
 
 <style>
   h1 {
