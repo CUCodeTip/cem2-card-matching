@@ -21,6 +21,8 @@
   onMount(() => {
     playCardMatched = playCardMatchedSound()
   })
+  // delay when the image is about to be hidden
+  const transitionDelay = 500
 
   $: if (revealedCards.length === 2) {
     const [first, second] = revealedCards
@@ -28,19 +30,24 @@
       first.hidden = second.hidden = true
       removedCards += 2
       playCardMatched()
+      revealedCards = []
       if (removedCards === $images.length) {
         // save result to the result store
         measuredResult.set({
           clicks,
           duration: Date.now() - startTime,
         })
-        images.set([]) // prevent weird page transition behavior
         // replaceState to prevent going back to the game, doesn't work?
-        goto('result', { replaceState: true })
+        setTimeout(async () => {
+          await goto('result', { replaceState: true })
+          images.clear()
+        }, transitionDelay + 10)
       }
-    }
-    revealedCards = []
-    first.revealed = second.revealed = false
+    } else
+      setTimeout(() => {
+        revealedCards = []
+        first.revealed = second.revealed = false
+      }, 1000)
   }
 
   const toggleModal = () => (showModal = !showModal)
@@ -60,18 +67,17 @@
     <Icon icon="mdi:information-outline" width="30" />
   </i>
 
-  <div class="inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md">
+  <div class="inline-grid gap-x-2 gap-y-2 grid-cols-4 grid-rows-4 rounded-md">
     {#each $images as image, i}
       <div
-        class="cursor-pointer relative rounded-md w-14 h-14 flex flex-col 
+        class="cursor-pointer relative w-26 h-26 flex flex-col 
     justify-center transition-opacity duration-200 ease-in-out"
         class:opacity-0={image.hidden}
-        class:cursor-default={image.hidden}
+        style={`transition-delay: ${transitionDelay}ms`}
+        class:cursor-default={image.hidden || revealedCards.length === 2}
         in:fade={{ delay: (100 * i) / 2, duration: (400 * i) / 4 }}
         on:click={() => {
-          if (image.hidden) {
-            return
-          }
+          if (image.hidden || revealedCards.length === 2) return
           if (!image.revealed) {
             // Pushing to to revealedCards doesn't seem to break the reactive statement
             revealedCards.push(image)
@@ -83,15 +89,17 @@
           }
         }}
       >
-        <div class="front-face card-face bg-gray-100 border-gray-100">
-          {#if image.revealed}
-            <img
-              transition:fade={{ duration: 100 }}
-              src={image.src}
-              alt={image.alt}
-              class="back-face object-cover object-center"
-            />
-          {/if}
+        <div
+          class="front-face card-face overflow-hidden bg-gray-100 border border-gray-100 hover:bg-gray-400"
+        >
+          <!-- {#if image.revealed} -->
+          <img
+            transition:fade={{ duration: 100 }}
+            src={image.src}
+            alt={image.alt}
+            class="back-face h-full w-full object-cover object-center"
+          />
+          <!-- {/if} -->
         </div>
       </div>
     {/each}
@@ -106,7 +114,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
+    border-radius: 20%;
     border-style: solid;
     overflow: removed;
     transition: transform 500ms ease-in-out;

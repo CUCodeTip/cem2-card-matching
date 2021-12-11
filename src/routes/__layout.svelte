@@ -14,8 +14,14 @@
   import { fade } from 'svelte/transition'
   import { prefetchRoutes } from '$app/navigation'
   import PageTransition from '$lib/PageTransition.svelte'
-  import { preloadImages } from '../utils'
   import Icon from '@iconify/svelte'
+  import {
+    hasSubmittedLocally,
+    hasSubmittedToFirestore,
+    preloadImages,
+  } from '../utils'
+  import images from '../images'
+  import particlesConfig from '../particlesConfig'
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
@@ -28,13 +34,17 @@
   }
 
   onMount(async () => {
-    // This needs to be imported on client only or else Vite complains about window not being defined
-    particlesConfig = (await import('../particlesConfig')).default
     // request.auth cannot be null when interacting with firestore, see firestore.rules
     await signInAnonymously(auth)
     // prefetch routes and preload images to speed things up
     prefetchRoutes()
     preloadImages()
+    // shuffle images if the user has already submitted
+    if (
+      hasSubmittedLocally(auth.currentUser.uid) ||
+      (await hasSubmittedToFirestore(auth.currentUser.uid))
+    )
+      images.shuffle()
   })
 </script>
 
@@ -64,9 +74,15 @@
 
 {#if particlesConfig}
   <div in:fade>
-    <Particles id="tsparticles" options={$particlesConfig} />
+    <Particles id="tsparticles" options={particlesConfig} />
   </div>
 {/if}
+
+<svelte:head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
+  </style>
+</svelte:head>
 
 <style windi:preflights:global windi:safelist:global>
   :root {
@@ -75,7 +91,6 @@
     --gray-400: #cbd5e0;
     --gray-900: #1a202c;
     --gray-100: #f7fafc;
-    --font-base: 1.3rem;
     background-color: var(--gray-900);
     color: var(--gray-100);
   }
@@ -87,18 +102,24 @@
   }
 
   :global(h1) {
-    line-height: 1.2;
-    @apply text-4xl text-gray-100;
-    font-weight: bold;
+    @apply text-7xl text-gray-100;
+    font-family: 'Comic Boys', cursive;
+    line-height: 4.5rem;
+    font-weight: normal;
     margin: 0;
   }
 
+  :global(p, span) {
+    @apply text-3xl;
+    font-family: 'Gaegu', cursive;
+  }
+
   :global(button) {
-    font-family: inherit;
-    font-size: x-large;
-    font-style: italic;
-    font-weight: bold;
-    padding: 0.8125rem 2.1875rem;
+    font-family: 'Cream Shoes', cursive;
+    font-size: 3rem;
+    font-weight: normal;
+    line-height: 3.55rem;
+    padding: 0.4125rem 2.1875rem;
     color: var(--gray-100);
     background-color: var(--gray-900);
     border-radius: 30px;
@@ -119,13 +140,13 @@
     color: var(--gray-900);
   }
 
-  :global(p) {
-    line-height: 1.6;
-    font-size: var(--font-base);
+  @font-face {
+    font-family: 'Comic Boys';
+    src: url('/fonts/ComicBoys.ttf') format('truetype');
   }
 
-  :global(span) {
-    line-height: 1.6;
-    font-size: var(--font-base);
+  @font-face {
+    font-family: 'Cream Shoes';
+    src: url('/fonts/Creamshoes.ttf') format('truetype');
   }
 </style>
