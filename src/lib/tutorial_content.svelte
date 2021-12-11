@@ -9,7 +9,7 @@
 
 <style>
   .content {
-    @apply block min-w-70 w-9/10 sm:w-100;
+    @apply block min-w-60 sm:w-100;
     display: flex;
     flex-direction: column;
     align-items: center;
