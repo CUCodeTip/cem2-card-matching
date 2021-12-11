@@ -48,7 +48,7 @@
       hasSubmittedLocally(auth.currentUser.uid) ||
       (await hasSubmittedToFirestore(auth.currentUser.uid))
     )
-      images.shuffle()
+      images.shuffleAll()
     // the audio store uses the Audio object which exists only on browsers
     const { audio: a, started: s } = (await import('../sounds')).default
     audio = a

@@ -7,7 +7,7 @@
   import measuredResult from '../resultStore'
   import images from '../images'
   import { onMount } from 'svelte'
-  import { getCardMatchedSound, getRandomMode, getVictorySound } from '../utils'
+  import { getCardMatchedSound, getVictorySound } from '../utils'
   import { saveTest } from '../firestoreActions'
 
   let revealedCards = []
@@ -20,7 +20,7 @@
   let clicks = 0
   let startTime = null
   // with the mode
-  const mode = getRandomMode()
+  const mode = images.setRandomMode()
 
   // delay when the image is about to be hidden
   const transitionDelay = 500
@@ -41,7 +41,8 @@
           setTimeout(async () => {
             // replaceState to prevent going back to the game, doesn't work?
             await goto('result', { replaceState: true })
-            images.clear()
+            images.resetOnMode(mode)
+            images.shuffleAll()
           }, transitionDelay + 500)
         })
       } else playCardMatched()

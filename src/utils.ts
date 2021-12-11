@@ -97,7 +97,3 @@ export function getVictorySound() {
     victorySound.play()
   }
 }
-
-export const getRandomMode = (): Mode => {
-  return Math.random() < 0.5 ? 'easy' : 'hard'
-}
