@@ -57,7 +57,6 @@
     --gray-400: #cbd5e0;
     --gray-900: #1a202c;
     --gray-100: #f7fafc;
-    --font-base: 1.3rem;
     background-color: var(--gray-900);
     color: var(--gray-100);
   }
@@ -76,10 +75,9 @@
     margin: 0;
   }
 
-  :global(p) {
+  :global(p, span) {
     font-family: 'Gaegu', cursive;
-    line-height: 1.6;
-    font-size: var(--font-base);
+    @apply text-3xl;
   }
 
   :global(button) {
@@ -106,11 +104,6 @@
     background-color: var(--gray-400);
     border-color: var(--gray-400);
     color: var(--gray-900);
-  }
-  
-  :global(span) {
-    line-height: 1.6;
-    font-size: var(--font-base);
   }
 
   @font-face {
