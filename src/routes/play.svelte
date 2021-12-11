@@ -19,12 +19,8 @@
     const [first, second] = revealedCards
     if (first.src === second.src) {
       first.hidden = second.hidden = true
-      // If the cards match, hide them without delay,
-      // unlike the set time out
       removedCards += 2
       revealedCards = []
-
-      first.revealed = second.revealed = false
       if (removedCards === $images.length) {
         // save result to the result store
         measuredResult.set({
@@ -61,7 +57,7 @@
     {#each $images as image, i}
       <div
         class="cursor-pointer relative rounded-md w-14 h-14 flex flex-col 
-    justify-center transition-opacity duration-200 ease-in-out"
+    justify-center transition-opacity delay-500 duration-200 ease-in-out"
         class:opacity-0={image.hidden}
         class:cursor-default={image.hidden || revealedCards.length === 2}
         in:fade={{ delay: (100 * i) / 2, duration: (400 * i) / 4 }}
