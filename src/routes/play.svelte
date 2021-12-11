@@ -58,11 +58,11 @@
     <Icon icon="mdi:information-outline" width="30" />
   </i>
 
-  <div class="inline-grid gap-x-2 gap-y-2 grid-cols-4 grid-rows-4 rounded-md">
+  <div class="inline-grid gap-1 grid-cols-4 grid-rows-4 rounded-md sm:(gap-2)">
     {#each $images as image, i}
       <div
-        class="cursor-pointer relative w-26 h-26 flex flex-col 
-    justify-center transition-opacity duration-200 ease-in-out"
+        class="cursor-pointer relative flex flex-col w-16 h-16
+    justify-center transition-opacity duration-200 ease-in-out sm:(w-26 h-26)"
         class:opacity-0={image.hidden}
         style={`transition-delay: ${transitionDelay}ms`}
         class:cursor-default={image.hidden || revealedCards.length === 2}
