@@ -54,7 +54,7 @@
   <i
     transition:fade
     on:click={toggleModal}
-    class="absolute top-5 right-5 cursor-pointer 
+    class="absolute top-5 right-17 cursor-pointer 
     opacity-75 hover:opacity-100 transition-opacity"
   >
     <Icon icon="mdi:information-outline" width="30" />

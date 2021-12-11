@@ -15,12 +15,17 @@
   import { prefetchRoutes } from '$app/navigation'
   import PageTransition from '$lib/PageTransition.svelte'
   import { preloadImages } from '../utils'
+  import Icon from '@iconify/svelte'
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
 
   let particlesConfig = null
-  let playbgm
+  let toggleSoundIcon = false
+
+  function toggleSound() {
+    toggleSoundIcon = !toggleSoundIcon
+  }
 
   onMount(async () => {
     // This needs to be imported on client only or else Vite complains about window not being defined
@@ -32,6 +37,24 @@
     preloadImages()
   })
 </script>
+
+{#if !toggleSoundIcon}
+  <i
+    on:click={toggleSound}
+    class="absolute top-5 right-5 cursor-pointer z-5
+    opacity-75 hover:opacity-100 transition-opacity"
+  >
+    <Icon icon="akar-icons:sound-on" color="white" width="30" />
+  </i>
+{:else}
+  <i
+    on:click={toggleSound}
+    class="absolute top-5 right-5 cursor-pointer z-5
+    opacity-75 hover:opacity-100 transition-opacity"
+  >
+    <Icon icon="akar-icons:sound-off" color="#ccc" width="30" />
+  </i>
+{/if}
 
 <main>
   <PageTransition refresh={pagePath}>
