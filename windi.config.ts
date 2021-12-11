@@ -9,6 +9,11 @@ export default defineConfig({
           900: '#1A202C',
         },
       },
+      fontFamily: {
+        Gaegu: ['Gaegu', 'cursive'],
+        ComicBoys: ['Comic Boys', 'cursive'],
+        CreamShoes: ['Cream Shoes', 'cursive'],
+      },
     },
   },
 })
