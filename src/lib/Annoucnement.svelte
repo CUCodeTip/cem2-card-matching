@@ -47,5 +47,4 @@
 <p>
   You took {$measuredResult.clicks} clicks to finish.<br />
   Total time taken {`${minute}:${secondText}`}<br />
-  Your score is {score}
 </p>
