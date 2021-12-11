@@ -14,6 +14,7 @@
   import { fade } from 'svelte/transition'
   import { prefetchRoutes } from '$app/navigation'
   import PageTransition from '$lib/PageTransition.svelte'
+  import { preloadImages } from '../utils'
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
@@ -25,8 +26,9 @@
     particlesConfig = (await import('../particlesConfig')).default
     // request.auth cannot be null when interacting with firestore, see firestore.rules
     await signInAnonymously(auth)
-    // prefetch routes to to speed up subsequent navigation
+    // prefetch routes and preload images to speed things up
     prefetchRoutes()
+    preloadImages()
   })
 </script>
 
