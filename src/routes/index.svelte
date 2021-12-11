@@ -11,7 +11,7 @@
   onMount(() => {
     setTimeout(() => {
       pageContent = [LandingContent, StartButton]
-    }, 1000)
+    }, 1500)
   })
 </script>
 
