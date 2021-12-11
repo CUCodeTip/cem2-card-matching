@@ -1,5 +1,5 @@
 <div class="content">
-  <h1>Tutorial</h1>
+  <h1>TUTORIAL</h1>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci elementum
     aliquam sed ultricies.

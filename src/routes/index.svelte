@@ -2,7 +2,7 @@
 </script>
 
 <div>
-  <h1>Website Title</h1>
+  <h1>CARD MATCHING</h1>
   <p>Erat dolor sed risus nulla amet scelerisque.</p>
 </div>
 <a href="/tutorial"><button>Start</button></a>
