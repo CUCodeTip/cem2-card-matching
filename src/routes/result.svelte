@@ -5,9 +5,7 @@
   import measuredResult from '../resultStore'
   import { getTimeinMinuteFormat } from '../utils'
 
-  $: cardCount = $images.length
   let minute: number, second: number
-
   // This doesn't work somehow
   // $: { minute, second } = getTimeinMinuteFormat($measuredResult.duration)
   $: {
@@ -18,6 +16,9 @@
     second = sec
   }
   $: secondText = ('0' + second).slice(0, 2)
+  $: cardCount = $images.length
+  $: score = calculateScore($measuredResult.duration, $measuredResult.clicks)
+  $: congratText = getCongratText(score)
 
   // time unit is milli second
   const calculateScore = (time: number, clickCount: number) => {
@@ -42,9 +43,6 @@
       return 'May be today is not your day...'
     }
   }
-
-  $: score = calculateScore($measuredResult.duration, $measuredResult.clicks)
-  $: congratText = getCongratText(score)
 
   onMount(() => {
     // if there is no result, go back to the home page
