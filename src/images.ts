@@ -44,12 +44,6 @@ const createImageStore = () => {
     defaultImages.sort(() => 0.5 - Math.random())
   }
 
-  if (
-    hasSubmittedLocally(auth.currentUser.uid) ||
-    hasSubmittedToFirestore(auth.currentUser.uid)
-  )
-    shuffle()
-
   const { subscribe, set } = writable(defaultImages)
 
   return {
@@ -59,6 +53,10 @@ const createImageStore = () => {
      */
     clear: () => set([]),
     set,
+    /**
+     * Shuffles the images without resetting the revealed and hidden states to false
+     */
+    shuffle,
     /**
      * Shuffles the images and reset the revealed and hidden states to false
      */
