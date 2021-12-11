@@ -1,5 +1,4 @@
 <script lang="ts">
-  import images from '../images'
   import measuredResult from '../resultStore'
   import { getTimeinMinuteFormat } from '../utils'
 
@@ -29,7 +28,7 @@
 
   const getCongratText = (score: number) => {
     if (score >= 9500) {
-      return 'You are the god!'
+      return "You're a god!"
     } else if (score >= 8000) {
       return 'Excellent!'
     } else if (score >= 6000) {
@@ -37,13 +36,20 @@
     } else if (score >= 3500) {
       return 'You can do better!'
     } else {
-      return "May be Today isn't your"
+      return 'Not your moment yet!'
     }
   }
 </script>
 
 <h1 class="mb-4">{congratText}</h1>
 <p>
-  You took {$measuredResult.clicks} clicks to finish.<br />
-  Total time taken {`${minute}:${secondText}`}<br />
+  You took <span class="italic font-medium"
+    >{$measuredResult.clicks} clicks</span
+  >
+  to finish.<br />
+  Total
+  <span class="italic font-medium">time taken {minute}:{secondText}</span><br />
 </p>
+
+<style>
+</style>
