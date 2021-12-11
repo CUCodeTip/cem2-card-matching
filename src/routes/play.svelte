@@ -8,7 +8,7 @@
   import images from '../images'
 
   let revealedCards = []
-  let hiddenCards = 0
+  let removedCards = 0
   let showModal = false // toggle this value to show/hide the modal
 
   // measure these
@@ -19,8 +19,8 @@
     const [first, second] = revealedCards
     if (first.src === second.src) {
       first.hidden = second.hidden = true
-      hiddenCards += 2
-      if (hiddenCards === $images.length) {
+      removedCards += 2
+      if (removedCards === $images.length) {
         // save result to the result store
         measuredResult.set({
           clicks,
@@ -98,9 +98,9 @@
     height: 100%;
     border-radius: 12px;
     border-style: solid;
-    overflow: hidden;
+    overflow: removed;
     transition: transform 500ms ease-in-out;
-    backface-visibility: hidden;
+    backface-visibility: removed;
   }
 
   .card-back {
