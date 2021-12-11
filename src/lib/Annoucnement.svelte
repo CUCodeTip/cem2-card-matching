@@ -13,7 +13,7 @@
     minute = min
     second = sec
   }
-  $: secondText = ('0' + second).slice(0, 2)
+  $: secondText = second < 10 ? `0${second}` : second
   $: cardCount = $images.length
   $: score = calculateScore($measuredResult.duration, $measuredResult.clicks)
   $: congratText = getCongratText(score)

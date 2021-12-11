@@ -39,6 +39,8 @@
   }
 
   const toggleModal = () => (showModal = !showModal)
+
+  $: console.log($measuredResult.duration)
 </script>
 
 {#if showModal}
