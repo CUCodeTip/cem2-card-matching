@@ -70,33 +70,29 @@
   }
 
   main {
-    width: 100vh;
+    width: 100vw;
     min-height: 100vh;
     overflow: hidden;
   }
 
   :global(h1) {
-    @apply text-7xl text-gray-100;
+    @apply text-5xl text-gray-100 sm:(text-7xl);
     font-family: 'Comic Boys', cursive;
-    line-height: 4.5rem;
     font-weight: normal;
     margin: 0;
   }
 
   :global(p, span) {
-    @apply text-3xl;
+    @apply text-xl sm:text-3xl;
     font-family: 'Gaegu', cursive;
   }
 
   :global(button) {
+    @apply text-3xl rounded-[30px] sm:(text-5xl rounded-[40px]);
     font-family: 'Cream Shoes', cursive;
-    font-size: 3rem;
-    font-weight: normal;
-    line-height: 3.55rem;
     padding: 0.4125rem 2.1875rem;
     color: var(--gray-100);
     background-color: var(--gray-900);
-    border-radius: 30px;
     border: 3px solid var(--gray-100);
     outline: none;
     font-variant-numeric: tabular-nums;

@@ -44,7 +44,7 @@
       }}
       on:click={emitClose}
     >
-      <img {src} alt="Colse" />
+      <img class="box-border w-44 sm:w-68" {src} alt="Colse" />
     </div>
     <slot>deafult</slot>
   </div>
@@ -55,10 +55,10 @@
     position: absolute;
   }
   .modal {
+    @apply box-border p-5 m-5 max-w-86 sm:(p-11 max-w-screen);
     display: flex;
     position: relative;
     flex-direction: column;
-    padding: 3.125rem;
     border-width: 3px;
     border-style: solid;
     border-color: var(--gray-100);
@@ -68,12 +68,12 @@
   }
 
   .close {
+    @apply w-9 sm:w-12;
     position: absolute;
     top: 0;
     right: 0;
     display: flex;
     justify-content: flex-end;
     transform: translate(50%, -50%);
-    width: 3rem;
   }
 </style>

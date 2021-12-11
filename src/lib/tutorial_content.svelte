@@ -9,14 +9,14 @@
 
 <style>
   .content {
+    @apply block min-w-60 sm:w-100;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 25rem;
   }
   img {
-    width: 17rem;
+    @apply w-48 sm:w-68;
     margin-top: 1rem;
   }
 </style>
