@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { playBGM } from '../utils'
   import LandingContent from '$lib/LandingContent.svelte'
   import StartButton from '$lib/StartButton.svelte'
   import { onMount } from 'svelte'
@@ -11,7 +10,7 @@
   onMount(async () => {
     setTimeout(() => {
       pageContent = [LandingContent, StartButton]
-    }, 1000)
+    }, 1500)
 
     audio = (await import('../sounds')).default
   })

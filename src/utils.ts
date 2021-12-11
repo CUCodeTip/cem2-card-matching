@@ -88,13 +88,3 @@ export function playCardMatchedSound() {
     else cardMatchedSound.play()
   }
 }
-
-//play a sound when user clicks 'Start' button
-export function playBGM() {
-  const bgm = new Audio('./sounds/bgm.mp3')
-  bgm.volume = 0.2
-  bgm.loop = true
-  bgm.currentTime = 41
-  bgm.play()
-  console.log(bgm.currentTime)
-}
