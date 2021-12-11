@@ -1,6 +1,8 @@
 <script>
   import { goto } from '$app/navigation'
   import { fade } from 'svelte/transition'
+  import Modal from '$lib/modal.svelte'
+  import TutorialContent from '$lib/tutorial_content.svelte'
 
   let images = [
     { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
@@ -23,6 +25,7 @@
 
   let revealedCards = []
   let hiddenCards = 0
+  let showModal = true // toggle this value to show/hide the modal
 
   $: if (revealedCards.length === 2) {
     const [first, second] = revealedCards
@@ -72,6 +75,14 @@
     </div>
   {/each}
 </div>
+
+{#if showModal}
+  <Modal
+    on:close={() => {
+      showModal = false
+    }}><TutorialContent /></Modal
+  >
+{/if}
 
 <style>
   .card-face {

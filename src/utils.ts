@@ -36,3 +36,16 @@ export const hasSubmittedToFirestore = async (userId: string) => {
   const testDoc = await getDoc(doc(db, 'tests', userId))
   return testDoc.exists()
 }
+
+/**
+ * Convert time in millisecond unit to minute and second unit
+ * @param millisecond
+ * @returns {minute, second} the object that stores time in minute and second format
+ */
+export const getTimeinMinuteFormat = (
+  milliseconds: number
+): { minute: number; second: number } => {
+  const minute = Math.floor(milliseconds / (60 * 1000))
+  const second = Math.floor((milliseconds % (60 * 1000)) / 1000)
+  return { minute, second }
+}

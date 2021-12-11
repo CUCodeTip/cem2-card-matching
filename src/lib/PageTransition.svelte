@@ -1,14 +1,14 @@
 <!-- PageTransition.svelte -->
 <script lang="ts">
-  import { fly } from 'svelte/transition'
+  import { fade } from 'svelte/transition'
   export let refresh = ''
 </script>
 
 {#key refresh}
   <div
     class="page-transition"
-    in:fly={{ x: -5, duration: 500, delay: 250 }}
-    out:fly={{ x: 5, duration: 500 }}
+    in:fade={{ duration: 500, delay: 500 }}
+    out:fade={{ duration: 500 }}
   >
     <slot />
   </div>
@@ -17,5 +17,15 @@
 <style>
   .page-transition {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    overflow: hidden;
   }
 </style>
