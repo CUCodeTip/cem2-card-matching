@@ -1,14 +1,13 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-
+  import images from '../images'
   import { onMount } from 'svelte'
-
   import measuredResult from '../resultStore'
   import { getTimeinMinuteFormat } from '../utils'
 
-  // Get score from play page
-  const cardCount = 16
+  $: cardCount = $images.length
   let minute: number, second: number
+
   // This doesn't work somehow
   // $: { minute, second } = getTimeinMinuteFormat($measuredResult.duration)
   $: {

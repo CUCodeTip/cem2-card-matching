@@ -5,25 +5,7 @@
   import TutorialContent from '$lib/tutorial_content.svelte'
   import Icon from '@iconify/svelte'
   import measuredResult from '../resultStore'
-
-  let images = [
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-    { src: './favicon.png', alt: 'og-image', revealed: false, hidden: false },
-  ]
+  import images from '../images'
 
   let revealedCards = []
   let hiddenCards = 0
@@ -38,13 +20,13 @@
     if (first.src === second.src) {
       first.hidden = second.hidden = true
       hiddenCards += 2
-      if (hiddenCards === images.length) {
+      if (hiddenCards === $images.length) {
         // save result to the result store
         measuredResult.set({
           clicks,
           duration: Date.now() - startTime,
         })
-        images = [] // prevent weird page transition behavior
+        images.set([]) // prevent weird page transition behavior
         // replaceState to prevent going back to the game, doesn't work?
         goto('result', { replaceState: true })
       }
@@ -69,7 +51,7 @@
   </i>
 
   <div class="inline-grid gap-x-1 gap-y-1 grid-cols-4 grid-rows-4 rounded-md">
-    {#each images as image, i}
+    {#each $images as image, i}
       <div
         class="cursor-pointer relative rounded-md w-14 h-14 flex flex-col 
     justify-center transition-opacity duration-200 ease-in-out"
