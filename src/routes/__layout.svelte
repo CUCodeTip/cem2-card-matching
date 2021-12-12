@@ -23,10 +23,10 @@
   } from '../utils'
   import images from '../images'
   import particlesConfig from '../particlesConfig'
+  import FontLoader from '$lib/FontLoader.svelte'
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
-
   let isSoundAudible = false
   let audio = null
   let audioStarted = null
@@ -78,6 +78,8 @@
     {/if}
   </div>
 {/if}
+
+<FontLoader />
 
 <main on:click|once={audio.play()}>
   <PageTransition refresh={pagePath}>

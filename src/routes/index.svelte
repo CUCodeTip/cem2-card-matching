@@ -3,22 +3,32 @@
   import StartButton from '$lib/StartButton.svelte'
   import { onMount } from 'svelte'
   import { flip } from 'svelte/animate'
-  import { fly } from 'svelte/transition'
+  import { fly, fade } from 'svelte/transition'
 
   let pageContent = [LandingContent]
+  let fontLoaded = false
 
   onMount(async () => {
+    // let all fonts loaded
+    setTimeout(() => {
+      fontLoaded = true
+    }, 1000 /* after this duration, fonts should be loaded */)
+
     setTimeout(() => {
       pageContent = [LandingContent, StartButton]
-    }, 1500)
+    }, 2500)
   })
 </script>
 
-{#each pageContent as component (component)}
-  <div in:fly={{ y: 20 }} animate:flip>
-    <svelte:component this={component} />
+{#if fontLoaded}
+  <div in:fade>
+    {#each pageContent as component (component)}
+      <div in:fly={{ y: 20 }} animate:flip>
+        <svelte:component this={component} />
+      </div>
+    {/each}
   </div>
-{/each}
+{/if}
 
 <style>
 </style>
