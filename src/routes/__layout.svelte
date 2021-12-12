@@ -104,6 +104,7 @@
 
   * {
     -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
 
   main {
