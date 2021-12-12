@@ -106,6 +106,10 @@
     color: var(--gray-100);
   }
 
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   main {
     width: 100vw;
     min-height: 100vh;
