@@ -7,8 +7,7 @@
   import measuredResult from '../resultStore'
   import images from '../images'
   import { onMount } from 'svelte'
-  import { getCardMatchedSound, getVictorySound } from '../utils'
-  import { saveTest } from '../firestoreActions'
+  import { getCardMatchedSound, getVictorySound, saveTest } from '../utils'
 
   let revealedCards = []
   let removedCards = 0
@@ -41,8 +40,7 @@
           setTimeout(async () => {
             // replaceState to prevent going back to the game, doesn't work?
             await goto('result', { replaceState: true })
-            images.resetOnMode(mode)
-            images.shuffleAll()
+            images.resetWithShuffleOnMode(mode)
           }, transitionDelay + 500)
         })
       } else playCardMatched()
