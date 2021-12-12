@@ -1,7 +1,7 @@
-import { getDoc, doc, addDoc, collection } from 'firebase/firestore'
+import { getDoc, doc, setDoc } from 'firebase/firestore'
 import { eImg } from './images'
 import { auth, db } from './initFirebase'
-import type { Mode, TestDocument } from './types'
+import type { TestDocument } from './types'
 
 /**
  * @returns user ids in _localStorage_ that has submitted a test
@@ -110,6 +110,5 @@ export const saveTest = async (payload: TestDocument): Promise<void> => {
     throw new Error('User is not logged in')
   }
 
-  await addDoc(collection(db, 'tests'), payload)
-  console.log('saved test')
+  await setDoc(doc(db, 'tests', Date.now() + ''), payload)
 }
