@@ -7,6 +7,7 @@
 </script>
 
 <script lang="ts">
+  import '../import.css'
   import { signInAnonymously } from 'firebase/auth'
   import { auth } from '../initFirebase'
   import { onMount } from 'svelte'
