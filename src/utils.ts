@@ -42,10 +42,10 @@ export const getTimeinMinuteFormat = (
  */
 export const preloadImages = async (
   images: string[] | string = [
+    '/Tutorial.gif',
     '/Close_active.png',
     '/Close_hover.png',
     '/Close.png',
-    'Tutorial.png',
     ...eImg,
     ...hImg,
   ]
