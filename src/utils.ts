@@ -1,4 +1,5 @@
 import { getDoc, doc } from 'firebase/firestore'
+import { eImg } from './images'
 import { db } from './initFirebase'
 import type { Mode } from './types'
 
@@ -62,6 +63,7 @@ export const preloadImages = async (
     '/Close_hover.png',
     '/Close.png',
     'Tutorial.png',
+    ...eImg,
   ]
 ): Promise<unknown[]> => {
   // resolve on load of all images
