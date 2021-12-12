@@ -8,6 +8,7 @@
   import images from '../images'
   import { onMount } from 'svelte'
   import { getCardMatchedSound, getVictorySound, saveTest } from '../utils'
+  import { auth } from '../initFirebase'
 
   let revealedCards = []
   let removedCards = 0
@@ -19,7 +20,7 @@
   let clicks = 0
   let startTime = null
   // with the mode
-  const mode = images.setRandomMode()
+  let mode
 
   // delay when the image is about to be hidden
   const transitionDelay = 500
@@ -53,9 +54,10 @@
 
   const toggleModal = () => (showModal = !showModal)
 
-  onMount(() => {
+  onMount(async () => {
     playCardMatched = getCardMatchedSound()
     playVictory = getVictorySound()
+    mode = await images.setModeForUser(auth.currentUser.uid)
   })
 </script>
 
@@ -100,14 +102,14 @@
           <div
             class="front-face card-face overflow-hidden bg-gray-100 border border-gray-100 hover:bg-gray-400"
           >
-            {#if image.revealed}
-              <img
-                transition:fade={{ duration: 100 }}
-                src={image.src}
-                alt={image.alt}
-                class="back-face h-full w-full object-cover object-center"
-              />
-            {/if}
+            <!-- {#if image.revealed} -->
+            <img
+              transition:fade={{ duration: 100 }}
+              src={image.src}
+              alt={image.alt}
+              class="back-face h-full w-full object-cover object-center"
+            />
+            <!-- {/if} -->
           </div>
         </div>
       {/each}

@@ -36,8 +36,6 @@
   }
 
   onMount(async () => {
-    // request.auth cannot be null when interacting with firestore, see firestore.rules
-    signInAnonymously(auth)
     // prefetch routes and preload images to speed things up
     prefetchRoutes()
     preloadImages()
@@ -47,6 +45,8 @@
     const { audio: a, started: s } = (await import('../sounds')).default
     audio = a
     audioStarted = s
+    // request.auth cannot be null when interacting with firestore, see firestore.rules
+    await signInAnonymously(auth)
     images.shuffleAll()
   })
 </script>

@@ -1,5 +1,7 @@
+import { getDoc, doc } from 'firebase/firestore'
 import { writable } from 'svelte/store'
-import type { ImageData, Mode } from './types'
+import { db } from './initFirebase'
+import type { ImageData, Mode, TestDocument } from './types'
 
 export const hImg = [
   '/cards/hard/1.jpg',
@@ -42,7 +44,7 @@ const createImageStore = () => {
     return images.sort(() => Math.random() - 0.5)
   })()
 
-  const { subscribe, set } = writable<ImageData[] | null>(null)
+  const { subscribe, set } = writable<ImageData[]>([])
 
   const resetOnMode = (mode: Mode) => {
     const images = mode === 'hard' ? hardImages : easyImages
@@ -82,6 +84,24 @@ const createImageStore = () => {
   }
 
   /**
+   * Return the mode of images for this particular user
+   * If the user has test data in firestore, set the mode to that of the data
+   */
+  const setModeForUser = async (userId: string): Promise<Mode> => {
+    const testDoc = await getDoc(doc(db, 'tests', userId))
+    if (!testDoc.exists()) {
+      return setRandomMode()
+    }
+    const test = testDoc.data() as TestDocument
+    if (test.mode === 'hard') {
+      set(hardImages)
+      return 'hard'
+    }
+    set(easyImages)
+    return 'easy'
+  }
+
+  /**
    * Shuffle both hard and easy images
    */
   const shuffleAll = () => {
@@ -112,6 +132,7 @@ const createImageStore = () => {
     setRandomMode,
     shuffleAll,
     resetWithShuffleOnMode,
+    setModeForUser,
   }
 }
 

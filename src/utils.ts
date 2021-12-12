@@ -23,23 +23,6 @@ export const saveUserIdLocally = (userId: string) => {
 }
 
 /**
- * Checks if a user has already submitted a test saved in _localStorage_
- * @param userId The anonymous user id
- */
-export const hasSubmittedLocally = (userId: string) => {
-  return getLocallySavedUserIds().includes(userId)
-}
-
-/**
- * Checks if a user has already submitted a test saved in _firebase_
- * @param userId The anonymous user id
- */
-export const hasSubmittedToFirestore = async (userId: string) => {
-  const testDoc = await getDoc(doc(db, 'tests', userId))
-  return testDoc.exists()
-}
-
-/**
  * Convert time in millisecond unit to minute and second unit
  * @param millisecond
  * @returns {minute, second} the object that stores time in minute and second format
@@ -111,5 +94,5 @@ export const saveTest = async (payload: TestDocument): Promise<void> => {
     throw new Error('User is not logged in')
   }
 
-  await setDoc(doc(db, 'tests', Date.now() + ''), payload)
+  await setDoc(doc(db, 'tests', auth.currentUser.uid), payload)
 }
