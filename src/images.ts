@@ -29,15 +29,26 @@ const hard8 =
 
 // export const hImg = [
 
+// export const eImg = [
+//   '/cards/easy/blue.png',
+//   '/cards/easy/brown.png',
+//   '/cards/easy/green.png',
+//   '/cards/easy/orange.png',
+//   '/cards/easy/pink.png',
+//   '/cards/easy/purple.png',
+//   '/cards/easy/red.png',
+//   '/cards/easy/yellow.png',
+// ]
+
 export const eImg = [
-  '/cards/easy/blue.png',
-  '/cards/easy/brown.png',
-  '/cards/easy/green.png',
-  '/cards/easy/orange.png',
-  '/cards/easy/pink.png',
-  '/cards/easy/purple.png',
-  '/cards/easy/red.png',
-  '/cards/easy/yellow.png',
+  'https://cdn.discordapp.com/attachments/886150814836617227/919611071956914226/unknown.png',
+  'https://cdn.discordapp.com/attachments/886150814836617227/919611071956914226/unknown.png',
+  'https://cdn.discordapp.com/attachments/886150814836617227/919611071956914226/unknown.png',
+  'https://cdn.discordapp.com/attachments/886150814836617227/919611071956914226/unknown.png',
+  'https://cdn.discordapp.com/attachments/886150814836617227/919611071956914226/unknown.png',
+  'https://cdn.discordapp.com/attachments/886150814836617227/919611071956914226/unknown.png',
+  'https://cdn.discordapp.com/attachments/886150814836617227/919611071956914226/unknown.png',
+  'https://cdn.discordapp.com/attachments/886150814836617227/919611071956914226/unknown.png',
 ]
 
 const createImageStore = () => {
@@ -122,6 +133,7 @@ const createImageStore = () => {
     setRandomMode,
     shuffleAll,
     resetOnMode,
+    setMode,
   }
 }
 

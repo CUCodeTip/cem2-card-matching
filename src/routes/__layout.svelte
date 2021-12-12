@@ -88,7 +88,7 @@
 </main>
 
 <div in:fade>
-  <Particles id="tsparticles" options={particlesConfig} />
+  <!-- <Particles id="tsparticles" options={particlesConfig} /> -->
 </div>
 
 <style windi:preflights:global windi:safelist:global>
