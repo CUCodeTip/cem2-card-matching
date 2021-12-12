@@ -35,7 +35,7 @@ export const hasSubmittedLocally = (userId: string) => {
  * @param userId The anonymous user id
  */
 export const hasSubmittedToFirestore = async (userId: string) => {
-  const testDoc = await getDoc(doc(db, 'tests', userId))
+  const testDoc = await getDoc(doc(db, 'pilot', userId))
   return testDoc.exists()
 }
 

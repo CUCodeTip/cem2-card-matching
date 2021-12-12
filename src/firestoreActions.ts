@@ -29,11 +29,12 @@ export const saveTest = async (payload: TestDocument): Promise<void> => {
   }
 
   const userId = auth.currentUser.uid
-  if (await hasSubmittedAlready(userId)) return
+  if (await hasSubmittedToFirestore(userId)) return
 
   // saves the test result
   await setDoc(doc(db, 'pilot', userId), payload)
+  console.log('hi')
 
   // remembers user locally
-  saveUserIdLocally(userId)
+  // saveUserIdLocally(userId)
 }
