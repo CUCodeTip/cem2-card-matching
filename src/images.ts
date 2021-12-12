@@ -18,16 +18,14 @@ const hard7 =
 const hard8 =
   'https://i.pinimg.com/736x/58/bd/0e/58bd0e7421c03e34e7f419f416a76763.jpg'
 
-const easy1 = 'https://media1.giphy.com/media/j4fbBhYgu8mNEHkQ4w/giphy.gif'
-const easy2 = 'https://giffiles.alphacoders.com/398/3987.gif'
-const easy3 = 'https://c.tenor.com/heQIzJAQvcIAAAAd/vibe-cat.gif'
-const easy4 =
-  'https://thumbs.gfycat.com/EmptyPleasedHorseshoecrab-size_restricted.gif'
-const easy5 =
-  'https://media1.giphy.com/media/XBieBakVVSo4fOD9TU/giphy-downsized-large.gif'
-const easy6 = 'https://c.tenor.com/G2PESJkdpFAAAAAd/this-is-fine.gif'
-const easy7 = 'https://c.tenor.com/o3SXzAksOokAAAAC/anime-meme.gif'
-const easy8 = 'https://c.tenor.com/o0lrdNm2BawAAAAC/aqua-cry-cute-aqua.gif'
+const easy1 = '/cards/easy/blue.png'
+const easy2 = '/cards/easy/brown.png'
+const easy3 = '/cards/easy/green.png'
+const easy4 = '/cards/easy/orange.png'
+const easy5 = '/cards/easy/pink.png'
+const easy6 = '/cards/easy/purple.png'
+const easy7 = '/cards/easy/red.png'
+const easy8 = '/cards/easy/yellow.png'
 
 const createImageStore = () => {
   const hardImages: ImageData[] = [
