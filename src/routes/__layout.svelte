@@ -16,17 +16,14 @@
   import { prefetchRoutes } from '$app/navigation'
   import PageTransition from '$lib/PageTransition.svelte'
   import Icon from '@iconify/svelte'
-  import {
-    hasSubmittedLocally,
-    hasSubmittedToFirestore,
-    preloadImages,
-  } from '../utils'
+  import { preloadImages } from '../utils'
   import images from '../images'
   import particlesConfig from '../particlesConfig'
   import FontLoader from '$lib/FontLoader.svelte'
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
+
   let isSoundAudible = false
   let audio = null
   let audioStarted = null
@@ -40,20 +37,17 @@
 
   onMount(async () => {
     // request.auth cannot be null when interacting with firestore, see firestore.rules
-    await signInAnonymously(auth)
+    signInAnonymously(auth)
     // prefetch routes and preload images to speed things up
     prefetchRoutes()
     preloadImages()
-    // shuffle images if the user has already submitted
-    if (
-      hasSubmittedLocally(auth.currentUser.uid) ||
-      (await hasSubmittedToFirestore(auth.currentUser.uid))
-    )
-      images.shuffleAll()
+
+    // blocking code should be at the bottom on onMount
     // the audio store uses the Audio object which exists only on browsers
     const { audio: a, started: s } = (await import('../sounds')).default
     audio = a
     audioStarted = s
+    images.shuffleAll()
   })
 </script>
 

@@ -1,7 +1,7 @@
-import { getDoc, doc } from 'firebase/firestore'
+import { getDoc, doc, setDoc } from 'firebase/firestore'
 import { eImg } from './images'
-import { db } from './initFirebase'
-import type { Mode } from './types'
+import { auth, db } from './initFirebase'
+import type { TestDocument } from './types'
 
 /**
  * @returns user ids in _localStorage_ that has submitted a test
@@ -98,4 +98,17 @@ export function getVictorySound() {
   return () => {
     victorySound.play()
   }
+}
+
+/**
+ * Uploads the result of the game to firestore.
+ * @note The id of this document is the id of the anonymous user who submitted this document
+ * @param payload The result of the play
+ */
+export const saveTest = async (payload: TestDocument): Promise<void> => {
+  if (!auth.currentUser) {
+    throw new Error('User is not logged in')
+  }
+
+  await setDoc(doc(db, 'tests', Date.now() + ''), payload)
 }

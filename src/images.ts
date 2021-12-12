@@ -116,12 +116,29 @@ const createImageStore = () => {
     shuffle(easyImages)
   }
 
+  /**
+   * Shuffle the images based on the mode
+   * @param mode 'easy' or 'hard'
+   */
+  const shuffleOnMode = (mode: Mode) => {
+    mode === 'hard' ? shuffle(hardImages) : shuffle(easyImages)
+  }
+
+  /**
+   * Reset the images based on the mode and shuffle
+   * @param mode 'easy' or 'hard'
+   */
+  const resetWithShuffleOnMode = (mode: Mode) => {
+    resetOnMode(mode)
+    shuffleOnMode(mode)
+  }
+
   return {
     subscribe,
     set,
     setRandomMode,
     shuffleAll,
-    resetOnMode,
+    resetWithShuffleOnMode,
   }
 }
 
