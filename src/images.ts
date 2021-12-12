@@ -18,14 +18,27 @@ const hard7 =
 const hard8 =
   'https://i.pinimg.com/736x/58/bd/0e/58bd0e7421c03e34e7f419f416a76763.jpg'
 
-const easy1 = '/cards/easy/blue.png'
-const easy2 = '/cards/easy/brown.png'
-const easy3 = '/cards/easy/green.png'
-const easy4 = '/cards/easy/orange.png'
-const easy5 = '/cards/easy/pink.png'
-const easy6 = '/cards/easy/purple.png'
-const easy7 = '/cards/easy/red.png'
-const easy8 = '/cards/easy/yellow.png'
+// const easy1 = '/cards/easy/blue.png'
+// const easy2 = '/cards/easy/brown.png'
+// const easy3 = '/cards/easy/green.png'
+// const easy4 = '/cards/easy/orange.png'
+// const easy5 = '/cards/easy/pink.png'
+// const easy6 = '/cards/easy/purple.png'
+// const easy7 = '/cards/easy/red.png'
+// const easy8 = '/cards/easy/yellow.png'
+
+// export const hImg = [
+
+export const eImg = [
+  '/cards/easy/blue.png',
+  '/cards/easy/brown.png',
+  '/cards/easy/green.png',
+  '/cards/easy/orange.png',
+  '/cards/easy/pink.png',
+  '/cards/easy/purple.png',
+  '/cards/easy/red.png',
+  '/cards/easy/yellow.png',
+]
 
 const createImageStore = () => {
   const hardImages: ImageData[] = [
@@ -47,24 +60,14 @@ const createImageStore = () => {
     { src: hard6, alt: '☺☺☺', revealed: false, hidden: false },
   ]
 
-  const easyImages: ImageData[] = [
-    { src: easy4, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy1, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy8, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy1, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy2, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy3, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy3, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy5, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy6, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy5, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy4, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy7, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy8, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy7, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy2, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: easy6, alt: '☺☺☺', revealed: false, hidden: false },
-  ]
+  const easyImages: ImageData[] = (() => {
+    const images = []
+    for (const img of eImg) {
+      images.push({ src: img, alt: '☺☺☺', revealed: false, hidden: false })
+      images.push({ src: img, alt: '☺☺☺', revealed: false, hidden: false })
+    }
+    return images.sort(() => Math.random() - 0.5)
+  })()
 
   const { subscribe, set } = writable<ImageData[] | null>(null)
 
