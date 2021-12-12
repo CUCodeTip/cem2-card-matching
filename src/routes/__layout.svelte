@@ -89,12 +89,6 @@
   <Particles id="tsparticles" options={particlesConfig} />
 </div>
 
-<svelte:head>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
-  </style>
-</svelte:head>
-
 <style windi:preflights:global windi:safelist:global>
   :root {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
