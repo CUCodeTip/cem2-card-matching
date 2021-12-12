@@ -31,22 +31,22 @@ const easy8 = 'https://c.tenor.com/o0lrdNm2BawAAAAC/aqua-cry-cute-aqua.gif'
 
 const createImageStore = () => {
   const hardImages: ImageData[] = [
+    { src: hard2, alt: '☺☺☺', revealed: false, hidden: false },
+    { src: hard5, alt: '☺☺☺', revealed: false, hidden: false },
     { src: hard4, alt: '☺☺☺', revealed: false, hidden: false },
+    { src: hard2, alt: '☺☺☺', revealed: false, hidden: false },
     { src: hard1, alt: '☺☺☺', revealed: false, hidden: false },
     { src: hard8, alt: '☺☺☺', revealed: false, hidden: false },
     { src: hard1, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: hard2, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: hard3, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: hard3, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: hard5, alt: '☺☺☺', revealed: false, hidden: false },
     { src: hard6, alt: '☺☺☺', revealed: false, hidden: false },
     { src: hard5, alt: '☺☺☺', revealed: false, hidden: false },
+    { src: hard7, alt: '☺☺☺', revealed: false, hidden: false },
+    { src: hard7, alt: '☺☺☺', revealed: false, hidden: false },
     { src: hard4, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: hard7, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: hard8, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: hard7, alt: '☺☺☺', revealed: false, hidden: false },
-    { src: hard2, alt: '☺☺☺', revealed: false, hidden: false },
+    { src: hard3, alt: '☺☺☺', revealed: false, hidden: false },
+    { src: hard3, alt: '☺☺☺', revealed: false, hidden: false },
     { src: hard6, alt: '☺☺☺', revealed: false, hidden: false },
+    { src: hard8, alt: '☺☺☺', revealed: false, hidden: false },
   ]
 
   const easyImages: ImageData[] = [
@@ -121,6 +121,7 @@ const createImageStore = () => {
     setRandomMode,
     shuffleAll,
     resetOnMode,
+    setMode,
   }
 }
 

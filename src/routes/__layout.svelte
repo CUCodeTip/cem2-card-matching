@@ -45,11 +45,11 @@
     prefetchRoutes()
     preloadImages()
     // shuffle images if the user has already submitted
-    if (
-      hasSubmittedLocally(auth.currentUser.uid) ||
-      (await hasSubmittedToFirestore(auth.currentUser.uid))
-    )
-      images.shuffleAll()
+    // if (
+    //   hasSubmittedLocally(auth.currentUser.uid) ||
+    //   (await hasSubmittedToFirestore(auth.currentUser.uid))
+    // )
+    //   images.shuffleAll()
     // the audio store uses the Audio object which exists only on browsers
     const { audio: a, started: s } = (await import('../sounds')).default
     audio = a
