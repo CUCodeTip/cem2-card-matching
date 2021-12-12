@@ -32,7 +32,7 @@ export const saveTest = async (payload: TestDocument): Promise<void> => {
   if (await hasSubmittedAlready(userId)) return
 
   // saves the test result
-  await setDoc(doc(db, 'tests', userId), payload)
+  await setDoc(doc(db, 'pilot', userId), payload)
 
   // remembers user locally
   saveUserIdLocally(userId)
