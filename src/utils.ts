@@ -1,7 +1,7 @@
-import { getDoc, doc, setDoc } from 'firebase/firestore'
+import { arrayUnion, doc, setDoc } from 'firebase/firestore'
 import { eImg, hImg } from './images'
 import { auth, db } from './initFirebase'
-import type { TestDocument } from './types'
+import type { MeasuredResult, Mode } from './types'
 
 /**
  * @returns user ids in _localStorage_ that has submitted a test
@@ -89,10 +89,17 @@ export function getVictorySound() {
  * @note The id of this document is the id of the anonymous user who submitted this document
  * @param payload The result of the play
  */
-export const saveTest = async (payload: TestDocument): Promise<void> => {
+export const saveTest = async (
+  payload: MeasuredResult,
+  mode: Mode
+): Promise<void> => {
   if (!auth.currentUser) {
     throw new Error('User is not logged in')
   }
 
-  await setDoc(doc(db, 'tests', auth.currentUser.uid), payload)
+  await setDoc(
+    doc(db, 'tests', auth.currentUser.uid),
+    { data: arrayUnion(payload), mode },
+    { merge: true }
+  )
 }

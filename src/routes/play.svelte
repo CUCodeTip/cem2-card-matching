@@ -37,7 +37,7 @@
         const duration = Date.now() - startTime
         measuredResult.set({ clicks, duration })
         // save result to firestore, then go to the result page
-        saveTest({ clicks, duration, mode }).then(() => {
+        saveTest({ clicks, duration }, mode).then(() => {
           setTimeout(async () => {
             // replaceState to prevent going back to the game, doesn't work?
             await goto('result', { replaceState: true })

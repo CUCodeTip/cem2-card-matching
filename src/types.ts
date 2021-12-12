@@ -10,7 +10,8 @@ export interface MeasuredResult {
  */
 export type TestDocument = {
   mode: Mode
-} & MeasuredResult
+  data: MeasuredResult[]
+}
 
 export type ImageData = {
   src: string
