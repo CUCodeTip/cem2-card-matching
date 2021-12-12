@@ -4,7 +4,7 @@
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci elementum
     aliquam sed ultricies.
   </p>
-  <img src="Tutorial.png" alt="Tutorial" />
+  <img src="Tutorial.gif" alt="Tutorial" />
 </div>
 
 <style>
