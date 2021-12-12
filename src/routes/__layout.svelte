@@ -113,19 +113,19 @@
 
   :global(h1) {
     @apply text-5xl text-gray-100 sm:(text-7xl);
-    font-family: 'Comic Boys', sans-serif;
+    font-family: 'Comic Boys', cursive;
     font-weight: normal;
     margin: 0;
   }
 
   :global(p, span) {
     @apply text-xl sm:text-3xl;
-    font-family: 'Gaegu', sans-serif;
+    font-family: 'Gaegu', cursive;
   }
 
   :global(button) {
     @apply text-3xl rounded-[30px] sm:(text-5xl rounded-[40px]);
-    font-family: 'Cream Shoes', sans-serif;
+    font-family: 'Cream Shoes', cursive;
     padding: 0.4125rem 2.1875rem;
     color: var(--gray-100);
     background-color: var(--gray-900);
