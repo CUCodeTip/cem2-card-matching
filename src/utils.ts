@@ -1,5 +1,5 @@
 import { getDoc, doc, setDoc } from 'firebase/firestore'
-import { eImg } from './images'
+import { eImg, hImg } from './images'
 import { auth, db } from './initFirebase'
 import type { TestDocument } from './types'
 
@@ -64,6 +64,7 @@ export const preloadImages = async (
     '/Close.png',
     'Tutorial.png',
     ...eImg,
+    ...hImg,
   ]
 ): Promise<unknown[]> => {
   // resolve on load of all images
