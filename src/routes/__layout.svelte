@@ -79,7 +79,7 @@
   </div>
 {/if}
 
-<main>
+<main on:click|once={audio.play()}>
   <PageTransition refresh={pagePath}>
     <slot />
   </PageTransition>
