@@ -21,7 +21,7 @@
   let startTime = null
   // with the mode
   // const mode = images.setRandomMode()
-  const mode = 'hard'
+  const mode = 'easy'
   images.setMode(mode)
 
   // delay when the image is about to be hidden
