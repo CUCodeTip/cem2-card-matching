@@ -3,7 +3,6 @@ import { writable } from 'svelte/store'
 const bgm = new Audio('./sounds/bgm.mp3')
 bgm.volume = 0.12
 bgm.loop = true
-bgm.currentTime = 41
 
 // this tells that the audio has started
 const started = writable(false)
