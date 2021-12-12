@@ -20,7 +20,7 @@
   }
 </script>
 
-<div class="absolute" in:scale={{ start: 0.5 }} out:scale>
+<div class="absolute" in:scale={{ start: 0.9 }} out:scale>
   <div class="modal">
     <div
       class="close"
