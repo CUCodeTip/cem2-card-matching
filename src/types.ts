@@ -9,8 +9,14 @@ export interface MeasuredResult {
  * Firestore document schema for those in **tests** collection
  */
 export type TestDocument = {
+  result: MeasuredResult[]
+}
+
+/**
+ * Firestore document schema for game mode for each user
+ */
+export type ModeDocument = {
   mode: Mode
-  data: MeasuredResult[]
 }
 
 export type ImageData = {

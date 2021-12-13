@@ -1,7 +1,7 @@
 import { getDoc, doc } from 'firebase/firestore'
 import { writable } from 'svelte/store'
 import { db } from './initFirebase'
-import type { ImageData, Mode, TestDocument } from './types'
+import type { ImageData, Mode, ModeDocument, TestDocument } from './types'
 
 export const hImg = [
   '/cards/hard/1.jpg',
@@ -88,12 +88,12 @@ const createImageStore = () => {
    * If the user has test data in firestore, set the mode to that of the data
    */
   const setModeForUser = async (userId: string): Promise<Mode> => {
-    const testDoc = await getDoc(doc(db, 'tests', userId))
-    if (!testDoc.exists()) {
+    const modeDocSnap = await getDoc(doc(db, 'mode', userId))
+    if (!modeDocSnap.exists()) {
       return setRandomMode()
     }
-    const test = testDoc.data() as TestDocument
-    if (test.mode === 'hard') {
+    const modeDoc = modeDocSnap.data() as ModeDocument
+    if (modeDoc.mode === 'hard') {
       set(hardImages)
       return 'hard'
     }

@@ -87,10 +87,10 @@ export function getVictorySound() {
 /**
  * Uploads the result of the game to firestore.
  * @note The id of this document is the id of the anonymous user who submitted this document
- * @param payload The result of the play
+ * @param measuredResult The result of the play
  */
 export const saveTest = async (
-  payload: MeasuredResult,
+  measuredResult: MeasuredResult,
   mode: Mode
 ): Promise<void> => {
   if (!auth.currentUser) {
@@ -99,7 +99,8 @@ export const saveTest = async (
 
   await setDoc(
     doc(db, 'tests', auth.currentUser.uid),
-    { data: arrayUnion(payload), mode },
+    { result: arrayUnion(measuredResult) },
     { merge: true }
   )
+  await setDoc(doc(db, 'mode', auth.currentUser.uid), { mode })
 }
