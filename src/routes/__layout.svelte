@@ -73,9 +73,7 @@
   </div>
 {/if}
 
-<div aria-hidden="true">
-  <FontLoader />
-</div>
+<FontLoader />
 
 <main on:click|once={audio.play()}>
   <PageTransition refresh={pagePath}>
