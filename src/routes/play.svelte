@@ -84,7 +84,9 @@
           class="w-full h-auto cursor-pointer relative flex flex-col justify-center transition-opacity duration-200 ease-in-out"
           class:opacity-0={image.hidden}
           style={`transition-delay: ${transitionDelay}ms`}
-          class:cursor-default={image.hidden || revealedCards.length === 2}
+          class:cursor-default={image.revealed ||
+            image.hidden ||
+            revealedCards.length === 2}
           in:fade={{ delay: (100 * i) / 2, duration: (400 * i) / 4 }}
           on:click={() => {
             if (image.hidden || revealedCards.length === 2) return
