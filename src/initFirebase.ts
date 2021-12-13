@@ -10,6 +10,7 @@ const firebaseConfig = {
   storageBucket: 'cem2-card-matching.appspot.com',
   messagingSenderId: '6109055646',
   appId: '1:6109055646:web:dc373abe2d25e02e0dc98f',
+  measurementId: 'G-07E8496YB5',
 }
 
 // Initialize Firebase

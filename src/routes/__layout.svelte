@@ -20,6 +20,7 @@
   import images from '../images'
   import particlesConfig from '../particlesConfig'
   import FontLoader from '$lib/FontLoader.svelte'
+  import { getAnalytics } from 'firebase/analytics'
 
   // changes on page navigation, trigger page transition
   export let pagePath: string
@@ -48,6 +49,7 @@
     // request.auth cannot be null when interacting with firestore, see firestore.rules
     await signInAnonymously(auth)
     images.shuffleAll()
+    getAnalytics()
   })
 </script>
 
