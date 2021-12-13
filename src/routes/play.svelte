@@ -102,7 +102,7 @@
           }}
         >
           <div
-            class="front-face card-face overflow-hidden bg-gray-100 border border-gray-100 hover:bg-gray-400"
+            class="front-face card-face overflow-hidden bg-gray-100 border border-gray-100 lg:hover:bg-gray-400"
           >
             {#if image.revealed}
               <img
