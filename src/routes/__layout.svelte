@@ -75,7 +75,7 @@
 
 <FontLoader />
 
-<main on:click|once={audio.play()}>
+<main on:click={audio && audio.play()}>
   <PageTransition refresh={pagePath}>
     <slot />
   </PageTransition>
