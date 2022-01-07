@@ -75,6 +75,21 @@
   </div>
 {/if}
 
+<a
+  href="https://github.com/CUCodeTip/cem2-card-matching"
+  target="_blank"
+  class="
+  absolute
+  top-5 left-5
+  opacity-75 hover:opacity-100
+  transition-opacity
+  z-5
+  cursor-pointer
+"
+>
+  <Icon icon="codicon:github" width="30" />
+</a>
+
 <FontLoader />
 
 <main on:click={audio && audio.play()}>
